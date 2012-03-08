@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CD60BE741509423B0000AD67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD60BE731509423B0000AD67 /* UIKit.framework */; };
+		CD60BE761509423B0000AD67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD60BE751509423B0000AD67 /* Foundation.framework */; };
+		CD60BE781509423B0000AD67 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD60BE771509423B0000AD67 /* CoreGraphics.framework */; };
+		CD60BE7E1509423B0000AD67 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CD60BE7C1509423B0000AD67 /* InfoPlist.strings */; };
+		CD60BE801509423B0000AD67 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE7F1509423B0000AD67 /* main.m */; };
+		CD60BE841509423B0000AD67 /* JBAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE831509423B0000AD67 /* JBAppDelegate.m */; };
+		CD60BE871509423B0000AD67 /* JBMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE861509423B0000AD67 /* JBMasterViewController.m */; };
+		CD60BE8A1509423B0000AD67 /* JBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE891509423B0000AD67 /* JBDetailViewController.m */; };
+		CD60BE8D1509423B0000AD67 /* JBMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD60BE8B1509423B0000AD67 /* JBMasterViewController.xib */; };
+		CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		CD60BE6F1509423B0000AD67 /* Lecture12.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lecture12.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD60BE731509423B0000AD67 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CD60BE751509423B0000AD67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CD60BE771509423B0000AD67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CD60BE7B1509423B0000AD67 /* Lecture12-Info.plist */ = {isa = PBXFileReference; path = "Lecture12-Info.plist"; sourceTree = "<group>"; };
+		CD60BE7D1509423B0000AD67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CD60BE7F1509423B0000AD67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CD60BE811509423B0000AD67 /* Lecture12-Prefix.pch */ = {isa = PBXFileReference; path = "Lecture12-Prefix.pch"; sourceTree = "<group>"; };
+		CD60BE821509423B0000AD67 /* JBAppDelegate.h */ = {isa = PBXFileReference; path = JBAppDelegate.h; sourceTree = "<group>"; };
+		CD60BE831509423B0000AD67 /* JBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBAppDelegate.m; sourceTree = "<group>"; };
+		CD60BE851509423B0000AD67 /* JBMasterViewController.h */ = {isa = PBXFileReference; path = JBMasterViewController.h; sourceTree = "<group>"; };
+		CD60BE861509423B0000AD67 /* JBMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBMasterViewController.m; sourceTree = "<group>"; };
+		CD60BE881509423B0000AD67 /* JBDetailViewController.h */ = {isa = PBXFileReference; path = JBDetailViewController.h; sourceTree = "<group>"; };
+		CD60BE891509423B0000AD67 /* JBDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBDetailViewController.m; sourceTree = "<group>"; };
+		CD60BE8C1509423B0000AD67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JBMasterViewController.xib; sourceTree = "<group>"; };
+		CD60BE8F1509423B0000AD67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JBDetailViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CD60BE6C1509423B0000AD67 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD60BE741509423B0000AD67 /* UIKit.framework in Frameworks */,
+				CD60BE761509423B0000AD67 /* Foundation.framework in Frameworks */,
+				CD60BE781509423B0000AD67 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CD60BE641509423B0000AD67 = {
+			isa = PBXGroup;
+			children = (
+				CD60BE791509423B0000AD67 /* Lecture12 */,
+				CD60BE721509423B0000AD67 /* Frameworks */,
+				CD60BE701509423B0000AD67 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CD60BE701509423B0000AD67 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CD60BE6F1509423B0000AD67 /* Lecture12.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CD60BE721509423B0000AD67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD60BE731509423B0000AD67 /* UIKit.framework */,
+				CD60BE751509423B0000AD67 /* Foundation.framework */,
+				CD60BE771509423B0000AD67 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CD60BE791509423B0000AD67 /* Lecture12 */ = {
+			isa = PBXGroup;
+			children = (
+				CD60BE821509423B0000AD67 /* JBAppDelegate.h */,
+				CD60BE831509423B0000AD67 /* JBAppDelegate.m */,
+				CD60BE851509423B0000AD67 /* JBMasterViewController.h */,
+				CD60BE861509423B0000AD67 /* JBMasterViewController.m */,
+				CD60BE881509423B0000AD67 /* JBDetailViewController.h */,
+				CD60BE891509423B0000AD67 /* JBDetailViewController.m */,
+				CD60BE8B1509423B0000AD67 /* JBMasterViewController.xib */,
+				CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */,
+				CD60BE7A1509423B0000AD67 /* Supporting Files */,
+			);
+			path = Lecture12;
+			sourceTree = "<group>";
+		};
+		CD60BE7A1509423B0000AD67 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CD60BE7B1509423B0000AD67 /* Lecture12-Info.plist */,
+				CD60BE7C1509423B0000AD67 /* InfoPlist.strings */,
+				CD60BE7F1509423B0000AD67 /* main.m */,
+				CD60BE811509423B0000AD67 /* Lecture12-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CD60BE6E1509423B0000AD67 /* Lecture12 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD60BE931509423B0000AD67 /* Build configuration list for PBXNativeTarget "Lecture12" */;
+			buildPhases = (
+				CD60BE6B1509423B0000AD67 /* Sources */,
+				CD60BE6C1509423B0000AD67 /* Frameworks */,
+				CD60BE6D1509423B0000AD67 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Lecture12;
+			productName = Lecture12;
+			productReference = CD60BE6F1509423B0000AD67 /* Lecture12.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CD60BE661509423B0000AD67 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JB;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Jason Brennan";
+			};
+			buildConfigurationList = CD60BE691509423B0000AD67 /* Build configuration list for PBXProject "Lecture12" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CD60BE641509423B0000AD67;
+			productRefGroup = CD60BE701509423B0000AD67 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CD60BE6E1509423B0000AD67 /* Lecture12 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CD60BE6D1509423B0000AD67 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD60BE7E1509423B0000AD67 /* InfoPlist.strings in Resources */,
+				CD60BE8D1509423B0000AD67 /* JBMasterViewController.xib in Resources */,
+				CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CD60BE6B1509423B0000AD67 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD60BE801509423B0000AD67 /* main.m in Sources */,
+				CD60BE841509423B0000AD67 /* JBAppDelegate.m in Sources */,
+				CD60BE871509423B0000AD67 /* JBMasterViewController.m in Sources */,
+				CD60BE8A1509423B0000AD67 /* JBDetailViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		CD60BE7C1509423B0000AD67 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD60BE7D1509423B0000AD67 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CD60BE8B1509423B0000AD67 /* JBMasterViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD60BE8C1509423B0000AD67 /* en */,
+			);
+			name = JBMasterViewController.xib;
+			sourceTree = "<group>";
+		};
+		CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CD60BE8F1509423B0000AD67 /* en */,
+			);
+			name = JBDetailViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CD60BE911509423B0000AD67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CD60BE921509423B0000AD67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CD60BE941509423B0000AD67 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Lecture12/Lecture12-Prefix.pch";
+				INFOPLIST_FILE = "Lecture12/Lecture12-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CD60BE951509423B0000AD67 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Lecture12/Lecture12-Prefix.pch";
+				INFOPLIST_FILE = "Lecture12/Lecture12-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CD60BE691509423B0000AD67 /* Build configuration list for PBXProject "Lecture12" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD60BE911509423B0000AD67 /* Debug */,
+				CD60BE921509423B0000AD67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD60BE931509423B0000AD67 /* Build configuration list for PBXNativeTarget "Lecture12" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD60BE941509423B0000AD67 /* Debug */,
+				CD60BE951509423B0000AD67 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CD60BE661509423B0000AD67 /* Project object */;
+}
