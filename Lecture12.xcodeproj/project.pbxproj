@@ -19,6 +19,7 @@
 		CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */; };
 		CD60BE98150943AB0000AD67 /* JBPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE97150943AB0000AD67 /* JBPerson.m */; };
 		CD60BE9B150952160000AD67 /* JBPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */; };
+		CDA1499F150FD2040022608B /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA1499E150FD2040022608B /* cat.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		CD60BE97150943AB0000AD67 /* JBPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBPerson.m; sourceTree = "<group>"; };
 		CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBPersonTableViewCell.h; sourceTree = "<group>"; };
 		CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBPersonTableViewCell.m; sourceTree = "<group>"; };
+		CDA1499E150FD2040022608B /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 				CD60BE97150943AB0000AD67 /* JBPerson.m */,
 				CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */,
 				CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */,
+				CDA1499E150FD2040022608B /* cat.png */,
 			);
 			path = Lecture12;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				CD60BE7E1509423B0000AD67 /* InfoPlist.strings in Resources */,
 				CD60BE8D1509423B0000AD67 /* JBMasterViewController.xib in Resources */,
 				CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */,
+				CDA1499F150FD2040022608B /* cat.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +310,7 @@
 				CD60BE951509423B0000AD67 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

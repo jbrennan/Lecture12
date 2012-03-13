@@ -106,7 +106,7 @@
     
 	cell.lastNameBold = _last;
     cell.person = [self.names objectAtIndex:indexPath.row];
-	
+	//cell.imageView.image = [UIImage imageNamed:@"cat"];
 	
     return cell;
 }
