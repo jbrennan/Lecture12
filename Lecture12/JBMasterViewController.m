@@ -7,127 +7,126 @@
 //
 
 #import "JBMasterViewController.h"
-
 #import "JBDetailViewController.h"
+#import "JBPerson.h"
+#import "JBPersonTableViewCell.h"
 
-@interface JBMasterViewController () {
-    NSMutableArray *_objects;
-}
+@interface JBMasterViewController ()
+@property (nonatomic, strong) NSArray *names;
 @end
 
+
+
 @implementation JBMasterViewController
-
 @synthesize detailViewController = _detailViewController;
+@synthesize names = _names;
+@synthesize firstNameSorter = _firstNameSorter;
+@synthesize lastNameSorter = _lastNameSorter;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-		self.title = NSLocalizedString(@"Master", @"Master");
-    }
-    return self;
+#pragma mark -
+#pragma mark View lifecycle
+
+
+- (void)viewDidLoad {
+	[super viewDidLoad];
+	
+	self.title = @"Names";
+	
+	
+	JBPerson *jason = [[JBPerson alloc] init];
+	jason.firstName = @"Jason";
+	jason.lastName = @"Brennan";
+	
+	JBPerson *zaphod = [[JBPerson alloc] init];
+	zaphod.firstName = @"Zaphod";
+	zaphod.lastName = @"Beeblebrox";
+	
+	JBPerson *ford = [[JBPerson alloc] init];
+	ford.firstName = @"Ford";
+	ford.lastName = @"Prefect";
+	
+	NSArray *n = [NSArray arrayWithObjects:jason, zaphod, ford, nil];
+	
+	self.firstNameSorter = ^NSComparisonResult(id obj1, id obj2) {
+		return [[(JBPerson *)obj1 firstName] compare:[(JBPerson *)obj2 firstName]];
+	};
+	
+	self.lastNameSorter = ^NSComparisonResult(id obj1, id obj2) {
+		return [[(JBPerson *)obj1 lastName] compare:[(JBPerson *)obj2 lastName]];
+	};
+	
+	self.names = [n sortedArrayUsingComparator:self.firstNameSorter];
+	
+	
+	UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"First", @"Last", nil]];
+	segment.segmentedControlStyle = UISegmentedControlStyleBar;
+	segment.selectedSegmentIndex = 0;
+	[segment addTarget:self action:@selector(segmentDidChange:) forControlEvents:UIControlEventValueChanged];
+	
+	
+	self.navigationItem.titleView = segment;
+	
+	
 }
-							
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
-	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-	self.navigationItem.rightBarButtonItem = addButton;
+
+- (void)segmentDidChange:(UISegmentedControl *)sender {
+	self.names = [self.names sortedArrayUsingComparator:(sender.selectedSegmentIndex == 0? self.firstNameSorter : self.lastNameSorter)];
+	[self.tableView reloadData];
 }
 
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
-}
+#pragma mark -
+#pragma mark Table view data source
 
-- (void)insertNewObject:(id)sender
-{
-    if (!_objects) {
-        _objects = [[NSMutableArray alloc] init];
-    }
-    [_objects insertObject:[NSDate date] atIndex:0];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-    [self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-}
-
-#pragma mark - Table View
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 	return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	return _objects.count;
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return [self.names count];
 }
 
+
 // Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    JBPersonTableViewCell *cell = (JBPersonTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell = [[JBPersonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-
-
-	NSDate *object = [_objects objectAtIndex:indexPath.row];
-	cell.textLabel.text = [object description];
+    
+    
+    cell.person = [self.names objectAtIndex:indexPath.row];
+	
     return cell;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+
+
+#pragma mark -
+#pragma mark Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        [_objects removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }
+
+#pragma mark -
+#pragma mark Memory management
+
+- (void)didReceiveMemoryWarning {
+    // Releases the view if it doesn't have a superview.
+    [super didReceiveMemoryWarning];
+    
+    // Relinquish ownership any cached data, images, etc. that aren't in use.
 }
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
+- (void)viewDidUnload {
+    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+    // For example: self.myOutlet = nil;
 }
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (!self.detailViewController) {
-        self.detailViewController = [[JBDetailViewController alloc] initWithNibName:@"JBDetailViewController" bundle:nil];
-    }
-    NSDate *object = [_objects objectAtIndex:indexPath.row];
-    self.detailViewController.detailItem = object;
-    [self.navigationController pushViewController:self.detailViewController animated:YES];
-}
-
 @end

@@ -17,6 +17,8 @@
 		CD60BE8A1509423B0000AD67 /* JBDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE891509423B0000AD67 /* JBDetailViewController.m */; };
 		CD60BE8D1509423B0000AD67 /* JBMasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD60BE8B1509423B0000AD67 /* JBMasterViewController.xib */; };
 		CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */; };
+		CD60BE98150943AB0000AD67 /* JBPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE97150943AB0000AD67 /* JBPerson.m */; };
+		CD60BE9B150952160000AD67 /* JBPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,18 +26,22 @@
 		CD60BE731509423B0000AD67 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CD60BE751509423B0000AD67 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CD60BE771509423B0000AD67 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		CD60BE7B1509423B0000AD67 /* Lecture12-Info.plist */ = {isa = PBXFileReference; path = "Lecture12-Info.plist"; sourceTree = "<group>"; };
+		CD60BE7B1509423B0000AD67 /* Lecture12-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Lecture12-Info.plist"; sourceTree = "<group>"; };
 		CD60BE7D1509423B0000AD67 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CD60BE7F1509423B0000AD67 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		CD60BE811509423B0000AD67 /* Lecture12-Prefix.pch */ = {isa = PBXFileReference; path = "Lecture12-Prefix.pch"; sourceTree = "<group>"; };
-		CD60BE821509423B0000AD67 /* JBAppDelegate.h */ = {isa = PBXFileReference; path = JBAppDelegate.h; sourceTree = "<group>"; };
+		CD60BE811509423B0000AD67 /* Lecture12-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lecture12-Prefix.pch"; sourceTree = "<group>"; };
+		CD60BE821509423B0000AD67 /* JBAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBAppDelegate.h; sourceTree = "<group>"; };
 		CD60BE831509423B0000AD67 /* JBAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBAppDelegate.m; sourceTree = "<group>"; };
-		CD60BE851509423B0000AD67 /* JBMasterViewController.h */ = {isa = PBXFileReference; path = JBMasterViewController.h; sourceTree = "<group>"; };
+		CD60BE851509423B0000AD67 /* JBMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBMasterViewController.h; sourceTree = "<group>"; };
 		CD60BE861509423B0000AD67 /* JBMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBMasterViewController.m; sourceTree = "<group>"; };
-		CD60BE881509423B0000AD67 /* JBDetailViewController.h */ = {isa = PBXFileReference; path = JBDetailViewController.h; sourceTree = "<group>"; };
+		CD60BE881509423B0000AD67 /* JBDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JBDetailViewController.h; sourceTree = "<group>"; };
 		CD60BE891509423B0000AD67 /* JBDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JBDetailViewController.m; sourceTree = "<group>"; };
 		CD60BE8C1509423B0000AD67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JBMasterViewController.xib; sourceTree = "<group>"; };
 		CD60BE8F1509423B0000AD67 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/JBDetailViewController.xib; sourceTree = "<group>"; };
+		CD60BE96150943AB0000AD67 /* JBPerson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBPerson.h; sourceTree = "<group>"; };
+		CD60BE97150943AB0000AD67 /* JBPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBPerson.m; sourceTree = "<group>"; };
+		CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBPersonTableViewCell.h; sourceTree = "<group>"; };
+		CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBPersonTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +97,10 @@
 				CD60BE8B1509423B0000AD67 /* JBMasterViewController.xib */,
 				CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */,
 				CD60BE7A1509423B0000AD67 /* Supporting Files */,
+				CD60BE96150943AB0000AD67 /* JBPerson.h */,
+				CD60BE97150943AB0000AD67 /* JBPerson.m */,
+				CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */,
+				CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */,
 			);
 			path = Lecture12;
 			sourceTree = "<group>";
@@ -175,6 +185,8 @@
 				CD60BE841509423B0000AD67 /* JBAppDelegate.m in Sources */,
 				CD60BE871509423B0000AD67 /* JBMasterViewController.m in Sources */,
 				CD60BE8A1509423B0000AD67 /* JBDetailViewController.m in Sources */,
+				CD60BE98150943AB0000AD67 /* JBPerson.m in Sources */,
+				CD60BE9B150952160000AD67 /* JBPersonTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

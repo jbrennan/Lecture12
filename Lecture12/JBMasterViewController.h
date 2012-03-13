@@ -14,4 +14,7 @@
 
 @property (strong, nonatomic) JBDetailViewController *detailViewController;
 
+@property (nonatomic, copy) NSComparator firstNameSorter;
+@property (nonatomic, copy) NSComparator lastNameSorter;
+
 @end
