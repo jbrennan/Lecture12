@@ -17,7 +17,9 @@
 
 
 
-@implementation JBMasterViewController
+@implementation JBMasterViewController {
+	BOOL _last;
+}
 @synthesize detailViewController = _detailViewController;
 @synthesize names = _names;
 @synthesize firstNameSorter = _firstNameSorter;
@@ -56,6 +58,7 @@
 	};
 	
 	self.names = [n sortedArrayUsingComparator:self.firstNameSorter];
+	_last = NO;
 	
 	
 	UISegmentedControl *segment = [[UISegmentedControl alloc] initWithItems:[NSArray arrayWithObjects:@"First", @"Last", nil]];
@@ -72,6 +75,7 @@
 
 - (void)segmentDidChange:(UISegmentedControl *)sender {
 	self.names = [self.names sortedArrayUsingComparator:(sender.selectedSegmentIndex == 0? self.firstNameSorter : self.lastNameSorter)];
+	_last = sender.selectedSegmentIndex == 1;
 	[self.tableView reloadData];
 }
 
@@ -100,7 +104,9 @@
     }
     
     
+	cell.lastNameBold = _last;
     cell.person = [self.names objectAtIndex:indexPath.row];
+	
 	
     return cell;
 }
