@@ -11,6 +11,7 @@
 @implementation JBPerson
 @synthesize firstName = _firstName;
 @synthesize lastName = _lastName;
+@synthesize phone = _phone;
 
 - (NSString *)fullName {
 	return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];

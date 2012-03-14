@@ -16,6 +16,7 @@
 
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
+@synthesize myLabel = _myLabel;
 
 #pragma mark - Managing the detail item
 
@@ -47,6 +48,7 @@
 
 - (void)viewDidUnload
 {
+    [self setMyLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 	self.detailDescriptionLabel = nil;

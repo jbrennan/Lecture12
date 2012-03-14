@@ -12,7 +12,7 @@
 #import "JBPersonTableViewCell.h"
 
 @interface JBMasterViewController ()
-@property (nonatomic, strong) NSArray *names;
+@property (nonatomic, strong) NSMutableArray *names;
 @end
 
 
@@ -47,7 +47,7 @@
 	ford.firstName = @"Ford";
 	ford.lastName = @"Prefect";
 	
-	NSArray *n = [NSArray arrayWithObjects:jason, zaphod, ford, nil];
+	//NSArray *n = [NSArray arrayWithObjects:jason, zaphod, ford, nil];
 	
 	self.firstNameSorter = ^NSComparisonResult(id obj1, id obj2) {
 		return [[(JBPerson *)obj1 firstName] compare:[(JBPerson *)obj2 firstName]];
@@ -57,7 +57,7 @@
 		return [[(JBPerson *)obj1 lastName] compare:[(JBPerson *)obj2 lastName]];
 	};
 	
-	self.names = [n sortedArrayUsingComparator:self.firstNameSorter];
+	self.names = [NSMutableArray array];//[n sortedArrayUsingComparator:self.firstNameSorter];
 	_last = NO;
 	
 	
@@ -70,11 +70,34 @@
 	self.navigationItem.titleView = segment;
 	
 	
+	// Start fetching the data
+	NSOperationQueue *q = [[NSOperationQueue alloc] init];
+	for (NSInteger i = 1; i < 6; i++) {
+		// start the operation
+		NSString *urlString = [NSString stringWithFormat:@"http://sikaman.dyndns.org:8888/courses/2601/data/%i.txt", i];
+		[q addOperationWithBlock:^{
+			NSArray *people = [NSArray arrayWithContentsOfURL:[NSURL URLWithString:urlString]];
+			NSLog(@"%@", people);
+			
+			JBPerson *person = [[JBPerson alloc] init];
+			person.firstName = [people objectAtIndex:0];
+			person.lastName = [people objectAtIndex:1];
+			person.phone = [people objectAtIndex:2];
+			
+			[self.names addObject:person];
+			[self.names sortUsingComparator:(_last ? self.lastNameSorter : self.firstNameSorter)];
+			[self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
+			
+		}];
+	}
+	
+	
 }
 
 
 - (void)segmentDidChange:(UISegmentedControl *)sender {
-	self.names = [self.names sortedArrayUsingComparator:(sender.selectedSegmentIndex == 0? self.firstNameSorter : self.lastNameSorter)];
+//	self.names = [self.names s:(sender.selectedSegmentIndex == 0? self.firstNameSorter : self.lastNameSorter)];
+	[self.names sortUsingComparator:(sender.selectedSegmentIndex == 0? self.firstNameSorter : self.lastNameSorter)];
 	_last = sender.selectedSegmentIndex == 1;
 	[self.tableView reloadData];
 }

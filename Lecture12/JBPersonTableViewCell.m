@@ -13,6 +13,7 @@
 @interface JBPersonTableViewCell ()
 @property (nonatomic, strong) UILabel *firstNameLabel;
 @property (nonatomic, strong) UILabel *lastNameLabel;
+@property (nonatomic, strong) UILabel *phoneLabel;
 
 - (void)commonHighlighting:(BOOL)selected;
 
@@ -24,22 +25,27 @@
 @synthesize firstNameLabel = _firstNameLabel;
 @synthesize lastNameLabel = _lastNameLabel;
 @synthesize lastNameBold = _lastNameBold;
+@synthesize phoneLabel = _phoneLabel;
 
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    
+	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
 		self.firstNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 		self.lastNameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+		self.phoneLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 		
-		self.firstNameLabel.textColor = [UIColor blackColor];
-		//self.firstNameLabel.backgroundColor = [UIColor yellowColor];
-		self.lastNameLabel.textColor = [UIColor blackColor];
+		self.firstNameLabel.textColor = [UIColor darkTextColor];
+		self.lastNameLabel.textColor = [UIColor darkTextColor];
+		
+		self.phoneLabel.textColor = [UIColor lightTextColor];
+		self.phoneLabel.textAlignment = UITextAlignmentRight;
 		
 		[self.contentView addSubview:self.firstNameLabel];
 		[self.contentView addSubview:self.lastNameLabel];
+		[self.contentView addSubview:self.phoneLabel];
 		
 		self.lastNameBold = YES;
 		
@@ -48,8 +54,7 @@
 }
 
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
@@ -67,16 +72,22 @@
 - (void)commonHighlighting:(BOOL)selected {
 	UIColor *backgroundColor = [UIColor whiteColor];
 	UIColor *textColor = [UIColor darkTextColor];
+	UIColor *phoneColor = [UIColor lightGrayColor];
 	
 	if (selected) {
 		backgroundColor = [UIColor clearColor];
 		textColor = [UIColor whiteColor];
+		phoneColor = [UIColor whiteColor];
 	}
 	
 	self.firstNameLabel.backgroundColor = backgroundColor;
 	self.firstNameLabel.textColor = textColor;
+	
 	self.lastNameLabel.backgroundColor = backgroundColor;
 	self.lastNameLabel.textColor = textColor;
+	
+	self.phoneLabel.backgroundColor = backgroundColor;
+	self.phoneLabel.textColor = phoneColor;
 }
 
 
@@ -88,19 +99,9 @@
 	
 	self.firstNameLabel.text = person.firstName;
 	self.lastNameLabel.text = person.lastName;
+	self.phoneLabel.text = person.phone;
 	
 	[self setNeedsLayout];
-	
-//	[self.firstNameLabel sizeToFit];
-//	[self.lastNameLabel sizeToFit];
-//	
-//	CGRect firstFrame = self.firstNameLabel.frame;
-//	firstFrame.origin.x = PADDING;
-//	CGRect secondFrame = self.lastNameLabel.frame;
-//	
-//	secondFrame.origin.x += firstFrame.size.width + PADDING / 2.0f;
-//	self.firstNameLabel.frame = firstFrame;
-//	self.lastNameLabel.frame = secondFrame;
 }
 
 
@@ -112,15 +113,21 @@
 	
 	[self.firstNameLabel sizeToFit];
 	[self.lastNameLabel sizeToFit];
+	[self.phoneLabel sizeToFit];
 	
 	//f.origin.y = (f.size.height / 2.0f) - (self.firstNameLabel.bounds.size.height / 2.0f);
 	f.size.width = self.firstNameLabel.bounds.size.width;
 	//f.size.height = self.firstNameLabel.bounds.size.height;
 	self.firstNameLabel.frame = f;
 	
-	f.origin.x += f.size.width + PADDING / 2.0f;
+	f.origin.x += f.size.width + 5.0f;
 	f.size.width = self.lastNameLabel.bounds.size.width;
 	self.lastNameLabel.frame = f;
+	
+	CGRect b = self.phoneLabel.bounds;
+	f.origin.x = r.size.width - b.size.width;
+	f.size.width = b.size.width;
+	self.phoneLabel.frame = f;
 	
 	
 	
