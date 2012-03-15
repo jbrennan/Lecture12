@@ -10,6 +10,8 @@
 #import "JBDetailViewController.h"
 #import "JBPerson.h"
 #import "JBPersonTableViewCell.h"
+#import "JBMessageViewController.h"
+
 
 @interface JBMasterViewController ()
 @property (nonatomic, strong) NSMutableArray *names;
@@ -90,6 +92,14 @@
 			
 		}];
 	}
+	
+	
+	
+	// Manually present the messages controller
+	JBMessageViewController *messages = [[JBMessageViewController alloc] initWithNibName:@"JBMessageViewController" bundle:nil];
+	UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:messages];
+	[self presentModalViewController:nav animated:YES];
+	
 	
 	
 }

@@ -20,6 +20,9 @@
 		CD60BE98150943AB0000AD67 /* JBPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE97150943AB0000AD67 /* JBPerson.m */; };
 		CD60BE9B150952160000AD67 /* JBPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */; };
 		CDA1499F150FD2040022608B /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA1499E150FD2040022608B /* cat.png */; };
+		CDD35A2B15124AF300AF2D7E /* JBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD35A2915124AF300AF2D7E /* JBMessageViewController.m */; };
+		CDD35A2C15124AF300AF2D7E /* JBMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD35A2A15124AF300AF2D7E /* JBMessageViewController.xib */; };
+		CDD35A3015124E7100AF2D7E /* JBCommunicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD35A2F15124E7100AF2D7E /* JBCommunicationController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,11 @@
 		CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBPersonTableViewCell.h; sourceTree = "<group>"; };
 		CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBPersonTableViewCell.m; sourceTree = "<group>"; };
 		CDA1499E150FD2040022608B /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
+		CDD35A2815124AF300AF2D7E /* JBMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBMessageViewController.h; sourceTree = "<group>"; };
+		CDD35A2915124AF300AF2D7E /* JBMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBMessageViewController.m; sourceTree = "<group>"; };
+		CDD35A2A15124AF300AF2D7E /* JBMessageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JBMessageViewController.xib; sourceTree = "<group>"; };
+		CDD35A2E15124E7100AF2D7E /* JBCommunicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBCommunicationController.h; sourceTree = "<group>"; };
+		CDD35A2F15124E7100AF2D7E /* JBCommunicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBCommunicationController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +112,11 @@
 				CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */,
 				CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */,
 				CDA1499E150FD2040022608B /* cat.png */,
+				CDD35A2815124AF300AF2D7E /* JBMessageViewController.h */,
+				CDD35A2915124AF300AF2D7E /* JBMessageViewController.m */,
+				CDD35A2A15124AF300AF2D7E /* JBMessageViewController.xib */,
+				CDD35A2E15124E7100AF2D7E /* JBCommunicationController.h */,
+				CDD35A2F15124E7100AF2D7E /* JBCommunicationController.m */,
 			);
 			path = Lecture12;
 			sourceTree = "<group>";
@@ -175,6 +188,7 @@
 				CD60BE8D1509423B0000AD67 /* JBMasterViewController.xib in Resources */,
 				CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */,
 				CDA1499F150FD2040022608B /* cat.png in Resources */,
+				CDD35A2C15124AF300AF2D7E /* JBMessageViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +205,8 @@
 				CD60BE8A1509423B0000AD67 /* JBDetailViewController.m in Sources */,
 				CD60BE98150943AB0000AD67 /* JBPerson.m in Sources */,
 				CD60BE9B150952160000AD67 /* JBPersonTableViewCell.m in Sources */,
+				CDD35A2B15124AF300AF2D7E /* JBMessageViewController.m in Sources */,
+				CDD35A3015124E7100AF2D7E /* JBCommunicationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
