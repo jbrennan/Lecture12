@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^JBCommunicationCallback)(id payload, NSError *error);
+
+@class NSInputStream, NSOutputStream;
 @interface JBCommunicationController : NSObject
 
 @end

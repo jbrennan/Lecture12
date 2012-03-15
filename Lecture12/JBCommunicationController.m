@@ -8,6 +8,21 @@
 
 #import "JBCommunicationController.h"
 
+
+@interface JBCommunicationController () <NSStreamDelegate>
+
+@property (nonatomic, strong) NSInputStream *inputStream;
+@property (nonatomic, strong) NSOutputStream *outputStream;
+
+@end
+
+
 @implementation JBCommunicationController
+@synthesize inputStream = _inputStream;
+@synthesize outputStream = _outputStream;
+
+- (void)blah {
+	[self.inputStream setDelegate:self];
+}
 
 @end
