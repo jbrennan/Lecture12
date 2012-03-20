@@ -13,4 +13,10 @@ typedef void(^JBCommunicationCallback)(id payload, NSError *error);
 @class NSInputStream, NSOutputStream;
 @interface JBCommunicationController : NSObject
 
+@property (nonatomic, copy) JBCommunicationCallback messageRecievedCallback;
+
+- (void)startNetworkCommunication;
+
+- (void)sendMessage:(id)message;
+
 @end

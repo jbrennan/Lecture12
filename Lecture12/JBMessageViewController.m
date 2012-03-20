@@ -7,14 +7,16 @@
 //
 
 #import "JBMessageViewController.h"
+#import "JBCommunicationController.h"
 
 @interface JBMessageViewController ()
-
+@property (nonatomic, strong) JBCommunicationController *communicationController;
 @end
 
 @implementation JBMessageViewController
 @synthesize messageTextField;
 @synthesize messageButton;
+@synthesize communicationController = _communicationController;
 
 
 - (void)viewDidLoad {
@@ -23,6 +25,20 @@
 	self.title = @"Messages";
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 	[self.messageTextField becomeFirstResponder];
+	
+	self.communicationController = [[JBCommunicationController alloc] init];
+	[self.communicationController startNetworkCommunication];
+	
+	[self.communicationController setMessageRecievedCallback:^(id payload, NSError *error) {
+		if (nil != error) {
+			NSLog(@"Error when recieving the message! %@", [error userInfo]);
+			return;
+		}
+		
+		NSLog(@"Got the message! %@", payload);
+		
+	}];
+	
 	
 }
 
@@ -45,6 +61,9 @@
 
 
 - (IBAction)messageButtonWasPressed:(UIButton *)sender {
+	
+	[self.communicationController sendMessage:self.messageTextField.text];
+	self.messageTextField.text = @"";
 }
 
 
