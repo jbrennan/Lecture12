@@ -8,13 +8,15 @@
 
 #import "JBCommunicationController.h"
 
-#define PORT 8080
 #define BUFFER_SIZE 1024
 
 @interface JBCommunicationController () <NSStreamDelegate>
 
 @property (nonatomic, strong) NSInputStream *inputStream;
 @property (nonatomic, strong) NSOutputStream *outputStream;
+
+@property (nonatomic, strong) NSString *host;
+@property (nonatomic, assign) NSInteger port;
 
 - (void)inputStreamHandleEvent:(NSStreamEvent)eventCode;
 - (void)outputStreamHandleEvent:(NSStreamEvent)eventCode;
@@ -26,13 +28,24 @@
 @synthesize inputStream = _inputStream;
 @synthesize outputStream = _outputStream;
 @synthesize messageRecievedCallback = _messageRecievedCallback;
+@synthesize host = _host;
+@synthesize port = _port;
+
+- (id)initWithServerAddress:(NSString *)address port:(NSInteger)port {
+	if ((self = [super init])) {
+		self.host = address;
+		self.port = port;
+	}
+	
+    return self;
+}
 
 
 - (void)startNetworkCommunication {
 	CFReadStreamRef readStream;
 	CFWriteStreamRef writeStream;
 	
-	CFStreamCreatePairWithSocketToHost(NULL, (CFStringRef)@"localhost", PORT, &readStream, &writeStream);
+	CFStreamCreatePairWithSocketToHost(NULL, (__bridge CFStringRef)self.host, self.port, &readStream, &writeStream);
 	self.inputStream = (__bridge NSInputStream *)readStream;
 	self.outputStream = (__bridge NSOutputStream *)writeStream;
 	

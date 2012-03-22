@@ -9,6 +9,7 @@
 #import "JBAppDelegate.h"
 
 #import "JBMasterViewController.h"
+#import "JBServicesBrowserTableViewController.h"
 
 @implementation JBAppDelegate
 
@@ -20,8 +21,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
 
-	JBMasterViewController *masterViewController = [[JBMasterViewController alloc] initWithNibName:@"JBMasterViewController" bundle:nil];
-	self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
+//	JBMasterViewController *masterViewController = [[JBMasterViewController alloc] initWithNibName:@"JBMasterViewController" bundle:nil];
+	
+	JBServicesBrowserTableViewController *services = [[JBServicesBrowserTableViewController alloc] initWithStyle:UITableViewStylePlain];
+	
+	self.navigationController = [[UINavigationController alloc] initWithRootViewController:services];
 	self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
     return YES;

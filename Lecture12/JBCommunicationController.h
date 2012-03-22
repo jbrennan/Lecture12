@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define DEFAULT_PORT 8080
+
 typedef void(^JBCommunicationCallback)(id payload, NSError *error);
 
 @class NSInputStream, NSOutputStream;
@@ -15,6 +17,7 @@ typedef void(^JBCommunicationCallback)(id payload, NSError *error);
 
 @property (nonatomic, copy) JBCommunicationCallback messageRecievedCallback;
 
+- (id)initWithServerAddress:(NSString *)address port:(NSInteger)port;
 - (void)startNetworkCommunication;
 
 - (void)sendMessage:(id)message;

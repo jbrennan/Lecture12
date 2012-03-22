@@ -26,7 +26,7 @@
 	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(done:)];
 	[self.messageTextField becomeFirstResponder];
 	
-	self.communicationController = [[JBCommunicationController alloc] init];
+	self.communicationController = [[JBCommunicationController alloc] initWithServerAddress:@"localhost" port:DEFAULT_PORT];
 	[self.communicationController startNetworkCommunication];
 	
 	[self.communicationController setMessageRecievedCallback:^(id payload, NSError *error) {
