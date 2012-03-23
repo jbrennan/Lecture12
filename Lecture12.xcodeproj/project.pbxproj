@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		CD125E38151BD0CF00419F2A /* JBServicesBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD125E37151BD0CF00419F2A /* JBServicesBrowser.m */; };
+		CD1F02F2151D0886008DD98A /* JBIMRoomsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1F02F1151D0886008DD98A /* JBIMRoomsTableViewController.m */; };
+		CD1F02F6151D0B9B008DD98A /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1F02F5151D0B9B008DD98A /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CD1F02F8151D0ED7008DD98A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1F02F7151D0ED7008DD98A /* Security.framework */; };
+		CD1F02FA151D103F008DD98A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD1F02F9151D103F008DD98A /* CFNetwork.framework */; };
+		CD1F02FD151D1104008DD98A /* JBIMServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1F02FC151D1104008DD98A /* JBIMServer.m */; };
+		CD1F0300151D25BF008DD98A /* JBIMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = CD1F02FF151D25BF008DD98A /* JBIMClient.m */; };
 		CD5827B5151914680026E10A /* JBServicesBrowserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD5827B4151914680026E10A /* JBServicesBrowserTableViewController.m */; };
 		CD60BE741509423B0000AD67 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD60BE731509423B0000AD67 /* UIKit.framework */; };
 		CD60BE761509423B0000AD67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD60BE751509423B0000AD67 /* Foundation.framework */; };
@@ -30,6 +36,16 @@
 /* Begin PBXFileReference section */
 		CD125E36151BD0CF00419F2A /* JBServicesBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBServicesBrowser.h; sourceTree = "<group>"; };
 		CD125E37151BD0CF00419F2A /* JBServicesBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBServicesBrowser.m; sourceTree = "<group>"; };
+		CD1F02F0151D0886008DD98A /* JBIMRoomsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBIMRoomsTableViewController.h; sourceTree = "<group>"; };
+		CD1F02F1151D0886008DD98A /* JBIMRoomsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBIMRoomsTableViewController.m; sourceTree = "<group>"; };
+		CD1F02F4151D0B9B008DD98A /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		CD1F02F5151D0B9B008DD98A /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		CD1F02F7151D0ED7008DD98A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		CD1F02F9151D103F008DD98A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		CD1F02FB151D1104008DD98A /* JBIMServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBIMServer.h; sourceTree = "<group>"; };
+		CD1F02FC151D1104008DD98A /* JBIMServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBIMServer.m; sourceTree = "<group>"; };
+		CD1F02FE151D25BF008DD98A /* JBIMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBIMClient.h; sourceTree = "<group>"; };
+		CD1F02FF151D25BF008DD98A /* JBIMClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBIMClient.m; sourceTree = "<group>"; };
 		CD5827B3151914680026E10A /* JBServicesBrowserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBServicesBrowserTableViewController.h; sourceTree = "<group>"; };
 		CD5827B4151914680026E10A /* JBServicesBrowserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBServicesBrowserTableViewController.m; sourceTree = "<group>"; };
 		CD60BE6F1509423B0000AD67 /* Lecture12.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lecture12.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +81,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD1F02FA151D103F008DD98A /* CFNetwork.framework in Frameworks */,
+				CD1F02F8151D0ED7008DD98A /* Security.framework in Frameworks */,
 				CD60BE741509423B0000AD67 /* UIKit.framework in Frameworks */,
 				CD60BE761509423B0000AD67 /* Foundation.framework in Frameworks */,
 				CD60BE781509423B0000AD67 /* CoreGraphics.framework in Frameworks */,
@@ -94,6 +112,8 @@
 		CD60BE721509423B0000AD67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CD1F02F9151D103F008DD98A /* CFNetwork.framework */,
+				CD1F02F7151D0ED7008DD98A /* Security.framework */,
 				CD60BE731509423B0000AD67 /* UIKit.framework */,
 				CD60BE751509423B0000AD67 /* Foundation.framework */,
 				CD60BE771509423B0000AD67 /* CoreGraphics.framework */,
@@ -127,6 +147,14 @@
 				CD5827B4151914680026E10A /* JBServicesBrowserTableViewController.m */,
 				CD125E36151BD0CF00419F2A /* JBServicesBrowser.h */,
 				CD125E37151BD0CF00419F2A /* JBServicesBrowser.m */,
+				CD1F02F0151D0886008DD98A /* JBIMRoomsTableViewController.h */,
+				CD1F02F1151D0886008DD98A /* JBIMRoomsTableViewController.m */,
+				CD1F02F4151D0B9B008DD98A /* GCDAsyncSocket.h */,
+				CD1F02F5151D0B9B008DD98A /* GCDAsyncSocket.m */,
+				CD1F02FB151D1104008DD98A /* JBIMServer.h */,
+				CD1F02FC151D1104008DD98A /* JBIMServer.m */,
+				CD1F02FE151D25BF008DD98A /* JBIMClient.h */,
+				CD1F02FF151D25BF008DD98A /* JBIMClient.m */,
 			);
 			path = Lecture12;
 			sourceTree = "<group>";
@@ -219,6 +247,10 @@
 				CDD35A3015124E7100AF2D7E /* JBCommunicationController.m in Sources */,
 				CD5827B5151914680026E10A /* JBServicesBrowserTableViewController.m in Sources */,
 				CD125E38151BD0CF00419F2A /* JBServicesBrowser.m in Sources */,
+				CD1F02F2151D0886008DD98A /* JBIMRoomsTableViewController.m in Sources */,
+				CD1F02F6151D0B9B008DD98A /* GCDAsyncSocket.m in Sources */,
+				CD1F02FD151D1104008DD98A /* JBIMServer.m in Sources */,
+				CD1F0300151D25BF008DD98A /* JBIMClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

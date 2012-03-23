@@ -7,6 +7,9 @@
 //
 
 #import "JBServicesBrowser.h"
+#import "JBCommunicationController.h"
+#import "JBIMServer.h"
+
 
 @interface JBServicesBrowser () <NSNetServiceDelegate, NSNetServiceBrowserDelegate>
 
@@ -15,6 +18,7 @@
 @property (nonatomic, strong) NSNetServiceBrowser *servicesBrowser;
 @property (nonatomic, strong) NSNetService *publishedService; // if no services can be found!
 @property (nonatomic, strong) NSMutableArray *foundServices;
+@property (nonatomic, strong) JBIMServer *hostedService;
 
 @end
 
@@ -26,6 +30,7 @@ NSString *kIMServiceName = @"_im._tcp.";
 @synthesize publishedService = _publishedService;
 @synthesize publishedServiceCallback = _publishedServiceCallback;
 @synthesize foundServices = _foundServices;
+@synthesize hostedService = _hostedService;
 
 
 - (id)initWithServicesCallback:(JBServicesBrowserCallback)callback {
@@ -44,7 +49,9 @@ NSString *kIMServiceName = @"_im._tcp.";
 	
 	self.publishedServiceCallback = publicationCallback;
 	
-	NSInteger DEFAULT_PORT = 8080;
+	
+	[self setupNetworkService];
+	
 	self.publishedService = [[NSNetService alloc] initWithDomain:@"" type:kIMServiceName name:serviceName port:DEFAULT_PORT];
 	
 	if (nil == self.publishedService) {
@@ -99,6 +106,14 @@ NSString *kIMServiceName = @"_im._tcp.";
 	[self.publishedService removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 	self.publishedService = nil;
 }
+
+
+- (void)setupNetworkService {
+	self.hostedService = [[JBIMServer alloc] init];
+	[self.hostedService startServer];
+	
+}
+
 
 - (void)teardownNetworkService {
 	

@@ -31,6 +31,7 @@
 @synthesize host = _host;
 @synthesize port = _port;
 
+
 - (id)initWithServerAddress:(NSString *)address port:(NSInteger)port {
 	if ((self = [super init])) {
 		self.host = address;
@@ -62,10 +63,24 @@
 }
 
 
+- (void)stop {
+	[self.inputStream close];
+	[self.outputStream close];
+	
+	[self.inputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	[self.outputStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+	
+	self.inputStream = nil;
+	self.outputStream = nil;
+	
+	NSLog(@"Closed the streams of the communication controller");
+}
+
+
 - (void)sendMessage:(id)message {
 	NSString *m = [message description];
 	
-	NSData *messageData = [m dataUsingEncoding:NSUTF8StringEncoding];
+	NSData *messageData = [message isKindOfClass:[NSString class]]? [m dataUsingEncoding:NSUTF8StringEncoding] : message;
 	[self.outputStream write:[messageData bytes] maxLength:[messageData length]];
 }
 

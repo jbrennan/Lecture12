@@ -8,6 +8,7 @@
 
 #import "JBServicesBrowserTableViewController.h"
 #import "JBServicesBrowser.h"
+#import "JBIMRoomsTableViewController.h"
 
 
 @interface JBServicesBrowserTableViewController ()
@@ -112,6 +113,9 @@
 		}];
 	} else {
 		// browse the service
+		JBIMRoomsTableViewController *rooms = [[JBIMRoomsTableViewController alloc] initWithStyle:UITableViewStylePlain];
+		rooms.netService = [self.servers objectAtIndex:indexPath.row];
+		[self.navigationController pushViewController:rooms animated:YES];
 	}
 }
 

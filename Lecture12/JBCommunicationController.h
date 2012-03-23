@@ -19,6 +19,7 @@ typedef void(^JBCommunicationCallback)(id payload, NSError *error);
 
 - (id)initWithServerAddress:(NSString *)address port:(NSInteger)port;
 - (void)startNetworkCommunication;
+- (void)stop;
 
 - (void)sendMessage:(id)message;
 
