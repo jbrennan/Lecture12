@@ -8,6 +8,7 @@
 
 #import "JBIMRoomsTableViewController.h"
 #import "JBIMClient.h"
+#import "JBMessage.h"
 
 
 @interface JBIMRoomsTableViewController () <NSNetServiceDelegate>
@@ -106,6 +107,14 @@
 //	NSData *data = [NSJSONSerialization dataWithJSONObject:d options:kNilOptions error:NULL];
 //	
 //	[self.communicationClient sendMessage:data];
+	
+	
+	NSDictionary *header = [NSDictionary dictionaryWithObject:kJBMessageHeaderTypeLogin forKey:kJBMessageHeaderType];
+	NSDictionary *body = [NSDictionary dictionaryWithObject:@"blah" forKey:@"bllllah"];
+	
+	JBMessage *m = [JBMessage messageWithHeader:header body:body];
+	[self.networkClient sendMessage:m];
+	
 }
 
 

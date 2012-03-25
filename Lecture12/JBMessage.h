@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const kJBMessageHeaderType;
+extern NSString *const kJBMessageHeaderTypeLogin;
+
 @interface JBMessage : NSObject
 
 @property (nonatomic, strong) NSDictionary *header;

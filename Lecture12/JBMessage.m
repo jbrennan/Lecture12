@@ -12,6 +12,10 @@
 #define kHeaderKey @"header"
 
 
+NSString *const kJBMessageHeaderType = @"type";
+NSString *const kJBMessageHeaderTypeLogin = @"LOGIN";
+
+
 @interface JBMessage ()
 @property (nonatomic, strong) NSMutableDictionary *storage;
 @end
@@ -32,8 +36,6 @@
 		self.storage = [NSMutableDictionary dictionaryWithCapacity:2];
 		self.header = header;
 		self.body = body;
-		
-		[self setBody:nil];
 	}
     return self;
 }
