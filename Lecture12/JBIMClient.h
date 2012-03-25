@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+@class JBMessage;
 @interface JBIMClient : NSObject
 
 - (id)initWithHost:(NSData *)address;
 - (void)startNetworkConnection;
+
+- (void)sendMessage:(JBMessage *)message;
 
 @end

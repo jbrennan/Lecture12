@@ -65,6 +65,16 @@
 }
 
 
+- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+	if (sock != self.listenSocket) {
+		NSLog(@"A client has disconnected");
+		[self.clientSockets removeObject:sock];
+		
+		// Now inform every other client this one has disconnected....
+	}
+}
+
+
 
 
 @end
