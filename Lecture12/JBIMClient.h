@@ -15,7 +15,7 @@ typedef void(^JBIMClientMessageCallback)(JBMessage *responseMessage);
 @interface JBIMClient : NSObject
 
 - (id)initWithHost:(NSData *)address;
-- (void)startNetworkConnectionWithLoginName:(NSString *)loginName callbackHandler:(JBIMClientMessageCallback)callback;
+- (void)startNetworkConnectionWithLoginName:(NSString *)loginName loginCallbackHandler:(JBIMClientMessageCallback)callback usersChangedCallback:(JBIMClientMessageCallback)changedCallback textMessageReceivedCallback:(JBIMClientMessageCallback)textMessageReceivedCallback;
 
 - (void)sendMessage:(JBMessage *)message withCallbackHandler:(JBIMClientMessageCallback)callback;
 

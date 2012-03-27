@@ -30,7 +30,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.title = @"Rooms";
+	self.title = @"Users";
 	
 }
 
@@ -58,12 +58,28 @@
 	self.networkClient = [[JBIMClient alloc] initWithHost:info];
 	NSInteger num = arc4random() % 10;
 	NSString *userName = [NSString stringWithFormat:@"Jason%d", num];
-	[self.networkClient startNetworkConnectionWithLoginName:userName callbackHandler:^(JBMessage *responseMessage) {
+	[self.networkClient startNetworkConnectionWithLoginName:userName loginCallbackHandler:^(JBMessage *responseMessage) {
+		
 		// Now logged in, update the room with a list of users
 		NSMutableArray *users = [NSMutableArray arrayWithArray:[[responseMessage body] valueForKey:kJBMessageBodyTypeUsers]];
 		self.loggedInUsers = users;
 		NSLog(@"%@ Login succeeded, got users: %@", userName, users);
 		[self.tableView reloadData];
+		
+	} usersChangedCallback:^(JBMessage *responseMessage) {
+		
+		// The list has either grown or shrunk. We need to update our view accordingly
+		NSLog(@"Users changed!");
+		
+		
+	} textMessageReceivedCallback:^(JBMessage *responseMessage) {
+		
+		// We got a message from some user
+		// Figure out who sent the message,
+		// Find the JBChat that corresponds to that user,
+		// Add the new message to that Chat
+		NSLog(@"We got a text message!");
+		
 	}];
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];

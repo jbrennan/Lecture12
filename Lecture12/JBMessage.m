@@ -14,7 +14,7 @@
 
 NSString *const kJBMessageHeaderType = @"type";
 NSString *const kJBMessageHeaderTypeLogin = @"LOGIN";
-NSString *const kJBMessageTypeLogout = @"LOGOUT";
+NSString *const kJBMessageHeaderTypeLogout = @"LOGOUT";
 NSString *const kJBMessageHeaderTypeText = @"TEXT";
 NSString *const kJBMessageBodyTypeSender = @"sender";
 NSString *const kJBMessageBodyTypeUsers = @"users";

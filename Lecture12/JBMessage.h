@@ -10,7 +10,7 @@
 
 extern NSString *const kJBMessageHeaderType;
 extern NSString *const kJBMessageHeaderTypeLogin;
-extern NSString *const kJBMessageTypeLogout;
+extern NSString *const kJBMessageHeaderTypeLogout;
 extern NSString *const kJBMessageHeaderTypeText;
 extern NSString *const kJBMessageBodyTypeSender;
 extern NSString *const kJBMessageBodyTypeUsers;

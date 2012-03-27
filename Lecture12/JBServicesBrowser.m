@@ -24,7 +24,9 @@
 
 NSString *kIMServiceName = @"_im._tcp.";
 
-@implementation JBServicesBrowser
+@implementation JBServicesBrowser {
+	BOOL _alreadyConnected;
+}
 @synthesize servicesCallback = _servicesCallback;
 @synthesize servicesBrowser = _servicesBrowser;
 @synthesize publishedService = _publishedService;
@@ -46,6 +48,11 @@ NSString *kIMServiceName = @"_im._tcp.";
 
 
 - (void)publishServiceForUsername:(NSString *)serviceName publicationCallback:(JBServicesBrowserPublishedServiceCallback)publicationCallback {
+	
+	if (_alreadyConnected)
+		return;
+	
+	_alreadyConnected = YES;
 	
 	self.publishedServiceCallback = publicationCallback;
 	
@@ -96,6 +103,7 @@ NSString *kIMServiceName = @"_im._tcp.";
 	
 	[self unpublishService];
 	
+	_alreadyConnected = NO;
 	self.publishedServiceCallback(nil, errorDict);
 	
 }

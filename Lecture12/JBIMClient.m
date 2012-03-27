@@ -12,6 +12,7 @@
 
 #define kMessageSentTag 99
 #define kMessageReplyTag 999
+#define kMessageFromServer 1
 
 #define IN_CALLBACK_RANGE 1000
 
@@ -49,10 +50,14 @@
 }
 
 
-- (void)startNetworkConnectionWithLoginName:(NSString *)loginName callbackHandler:(JBIMClientMessageCallback)callback {
+- (void)startNetworkConnectionWithLoginName:(NSString *)loginName loginCallbackHandler:(JBIMClientMessageCallback)callback usersChangedCallback:(JBIMClientMessageCallback)changedCallback textMessageReceivedCallback:(JBIMClientMessageCallback)textMessageReceivedCallback; {
 	NSError *error = nil;
 	self.loginCallback = callback;
 	self.loginName = loginName;
+	
+	[self.messageCallbackHandlers setValue:[changedCallback copy] forKey:kJBMessageHeaderTypeLogin]; // We'll get this message unsolicited from the server.. that's why it's different from self.loginCallback
+	[self.messageCallbackHandlers setValue:[changedCallback copy] forKey:kJBMessageHeaderTypeLogout]; // Adding the same block twice, because it'll handle logouts, too (basically any kind of user-list change).
+	[self.messageCallbackHandlers setValue:[textMessageReceivedCallback copy] forKey:kJBMessageHeaderTypeText];
 	
 	if (![self.clientSocket connectToAddress:self.address error:&error]) {
 		NSLog(@"Error connecting to server: %@", [error userInfo]);
@@ -61,19 +66,6 @@
 	
 	NSLog(@"Going to connect to the host");
 	
-//	NSDictionary *d = [NSDictionary dictionaryWithObject:@"Login" forKey:@"type"];
-//	NSDictionary *e = [NSDictionary dictionaryWithObject:@"HALLO" forKey:@"greeting"];
-//	
-//	NSError *jError = nil;
-//	NSData *b = [NSJSONSerialization dataWithJSONObject:d options:kNilOptions error:&jError];
-//	if (nil == b) {
-//		NSLog(@"There was an error creating the JSON data %@", [jError userInfo]);
-//	}
-//	
-//	NSData *f = [NSJSONSerialization dataWithJSONObject:e options:kNilOptions error:NULL];
-//	
-//	[self.clientSocket writeData:b withTimeout:-1 tag:99];
-//	[self.clientSocket writeData:f withTimeout:-1 tag:98];
 	
 }
 
@@ -131,11 +123,26 @@
 		NSString *j = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 		NSLog(@"From server: %@", j);
 	} else {
-		// it came from something else
+		// it came from something else... dispatch it!
+		JBMessage *message = [JBMessage messageWithJSONData:data];
+		JBIMClientMessageCallback handler = [self.messageCallbackHandlers objectForKey:[[[message header] valueForKey:kJBMessageHeaderType] uppercaseString]];
+		
+		if (nil != handler) {
+			NSLog(@"Invoking a handler for the Server message");
+			handler(message);
+		} else {
+			NSLog(@"Client: Couldn't find a handler for this message!!!");
+			NSString *j = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+			NSLog(@"New From server: %@", j);
+		}
+		
+		
+
 	}
 	
 	// We also need to tell it to just read generically.
 	// Because we might get an event from another user say, like when they log out or log in for example
+	[self.clientSocket readDataWithTimeout:-1 tag:kMessageFromServer];
 }
 
 
