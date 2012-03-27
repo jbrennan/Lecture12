@@ -14,12 +14,14 @@
 @interface JBIMRoomsTableViewController () <NSNetServiceDelegate>
 
 @property (nonatomic, strong) JBIMClient *networkClient;
+@property (nonatomic, strong) NSMutableArray *loggedInUsers;
 
 @end
 
 @implementation JBIMRoomsTableViewController
 @synthesize networkClient = _networkClient;
 @synthesize netService = _netService;
+@synthesize loggedInUsers = _loggedInUsers;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -54,7 +56,15 @@
 	NSData *info = [addresses objectAtIndex:0];
 	
 	self.networkClient = [[JBIMClient alloc] initWithHost:info];
-	[self.networkClient startNetworkConnection];
+	NSInteger num = arc4random() % 10;
+	NSString *userName = [NSString stringWithFormat:@"Jason%d", num];
+	[self.networkClient startNetworkConnectionWithLoginName:userName callbackHandler:^(JBMessage *responseMessage) {
+		// Now logged in, update the room with a list of users
+		NSMutableArray *users = [NSMutableArray arrayWithArray:[[responseMessage body] valueForKey:kJBMessageBodyTypeUsers]];
+		self.loggedInUsers = users;
+		NSLog(@"%@ Login succeeded, got users: %@", userName, users);
+		[self.tableView reloadData];
+	}];
 	
 	[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 	
@@ -76,7 +86,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 1;
+	return [self.loggedInUsers count];
 }
 
 
@@ -91,7 +101,7 @@
     }
     
     
-    
+    cell.textLabel.text = [[self.loggedInUsers objectAtIndex:indexPath.row] description];
 	
     return cell;
 }
@@ -109,11 +119,8 @@
 //	[self.communicationClient sendMessage:data];
 	
 	
-	NSDictionary *header = [NSDictionary dictionaryWithObject:kJBMessageHeaderTypeLogin forKey:kJBMessageHeaderType];
-	NSDictionary *body = [NSDictionary dictionaryWithObject:@"Jason" forKey:kJBMessageBodyTypeSender];
-	
-	JBMessage *m = [JBMessage messageWithHeader:header body:body];
-	[self.networkClient sendMessage:m];
+
+
 	
 }
 

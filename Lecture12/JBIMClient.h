@@ -9,11 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class JBMessage;
+
+typedef void(^JBIMClientMessageCallback)(JBMessage *responseMessage);
+
 @interface JBIMClient : NSObject
 
 - (id)initWithHost:(NSData *)address;
-- (void)startNetworkConnection;
+- (void)startNetworkConnectionWithLoginName:(NSString *)loginName callbackHandler:(JBIMClientMessageCallback)callback;
 
-- (void)sendMessage:(JBMessage *)message;
+- (void)sendMessage:(JBMessage *)message withCallbackHandler:(JBIMClientMessageCallback)callback;
 
 @end
