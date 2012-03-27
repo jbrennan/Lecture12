@@ -27,6 +27,8 @@
 		CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */; };
 		CD60BE98150943AB0000AD67 /* JBPerson.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE97150943AB0000AD67 /* JBPerson.m */; };
 		CD60BE9B150952160000AD67 /* JBPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */; };
+		CD82C9E7152212D700E46D8D /* JBChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CD82C9E6152212D700E46D8D /* JBChatMessage.m */; };
+		CD82C9EC1522139600E46D8D /* JBChatRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = CD82C9EB1522139600E46D8D /* JBChatRoom.m */; };
 		CD8C7D49151F93380075CAAF /* JBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C7D48151F93380075CAAF /* JBMessage.m */; };
 		CD8C7D4D151FE0000075CAAF /* JBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C7D4C151FE0000075CAAF /* JBUser.m */; };
 		CDA1499F150FD2040022608B /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA1499E150FD2040022608B /* cat.png */; };
@@ -70,6 +72,10 @@
 		CD60BE97150943AB0000AD67 /* JBPerson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBPerson.m; sourceTree = "<group>"; };
 		CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBPersonTableViewCell.h; sourceTree = "<group>"; };
 		CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBPersonTableViewCell.m; sourceTree = "<group>"; };
+		CD82C9E5152212D700E46D8D /* JBChatMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChatMessage.h; sourceTree = "<group>"; };
+		CD82C9E6152212D700E46D8D /* JBChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChatMessage.m; sourceTree = "<group>"; };
+		CD82C9EA1522139600E46D8D /* JBChatRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChatRoom.h; sourceTree = "<group>"; };
+		CD82C9EB1522139600E46D8D /* JBChatRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChatRoom.m; sourceTree = "<group>"; };
 		CD8C7D47151F93380075CAAF /* JBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBMessage.h; sourceTree = "<group>"; };
 		CD8C7D48151F93380075CAAF /* JBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBMessage.m; sourceTree = "<group>"; };
 		CD8C7D4B151FE0000075CAAF /* JBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBUser.h; sourceTree = "<group>"; };
@@ -165,6 +171,7 @@
 				CD8C7D48151F93380075CAAF /* JBMessage.m */,
 				CD8C7D4B151FE0000075CAAF /* JBUser.h */,
 				CD8C7D4C151FE0000075CAAF /* JBUser.m */,
+				CD82C9E91522137B00E46D8D /* Chat Stuff */,
 			);
 			path = Lecture12;
 			sourceTree = "<group>";
@@ -178,6 +185,17 @@
 				CD60BE811509423B0000AD67 /* Lecture12-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CD82C9E91522137B00E46D8D /* Chat Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				CD82C9E5152212D700E46D8D /* JBChatMessage.h */,
+				CD82C9E6152212D700E46D8D /* JBChatMessage.m */,
+				CD82C9EA1522139600E46D8D /* JBChatRoom.h */,
+				CD82C9EB1522139600E46D8D /* JBChatRoom.m */,
+			);
+			name = "Chat Stuff";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +281,8 @@
 				CD1F0300151D25BF008DD98A /* JBIMClient.m in Sources */,
 				CD8C7D49151F93380075CAAF /* JBMessage.m in Sources */,
 				CD8C7D4D151FE0000075CAAF /* JBUser.m in Sources */,
+				CD82C9E7152212D700E46D8D /* JBChatMessage.m in Sources */,
+				CD82C9EC1522139600E46D8D /* JBChatRoom.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
