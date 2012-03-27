@@ -11,6 +11,7 @@
 #import "JBMessage.h"
 
 #define kMessageSentTag 99
+#define kMessageReplyTag 999
 
 
 @interface JBIMClient () <GCDAsyncSocketDelegate>
@@ -67,6 +68,7 @@
 - (void)sendMessage:(JBMessage *)message {
 	NSData *data = [message JSONData];
 	[self.clientSocket writeData:data withTimeout:-1 tag:kMessageSentTag];
+	[self.clientSocket readDataWithTimeout:-1 tag:kMessageReplyTag];
 }
 
 

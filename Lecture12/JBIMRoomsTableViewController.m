@@ -110,7 +110,7 @@
 	
 	
 	NSDictionary *header = [NSDictionary dictionaryWithObject:kJBMessageHeaderTypeLogin forKey:kJBMessageHeaderType];
-	NSDictionary *body = [NSDictionary dictionaryWithObject:@"blah" forKey:@"bllllah"];
+	NSDictionary *body = [NSDictionary dictionaryWithObject:@"Jason" forKey:kJBMessageBodyTypeSender];
 	
 	JBMessage *m = [JBMessage messageWithHeader:header body:body];
 	[self.networkClient sendMessage:m];

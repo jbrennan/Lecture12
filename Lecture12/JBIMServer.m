@@ -9,36 +9,38 @@
 #import "JBIMServer.h"
 #import "GCDAsyncSocket.h"
 #import "JBMessage.h"
+#import "JBUser.h"
 
 
 #define kClientSocketReadTag 100
 #define kClientSocketWriteTag 101
 
-typedef JBMessage *(^JBEventHandlerBlock)(id event);
+typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 
 
 @interface JBIMServer () <GCDAsyncSocketDelegate>
 
 @property (nonatomic, strong) GCDAsyncSocket *listenSocket;
-@property (nonatomic, strong) NSMutableArray *clientSockets;
+@property (nonatomic, strong) NSMutableArray *connectedClients;
 @property (nonatomic, strong) NSMutableDictionary *reactors;
 
-- (JBMessage *)responseMessageByProcessingMessage:(JBMessage *)message;
+- (JBMessage *)responseMessageByProcessingMessage:(JBMessage *)message user:(JBUser *)user;
 - (NSArray *)recipientsForSourceMessage:(JBMessage *)message;
 - (void)writeResponse:(JBMessage *)response toRecipients:(NSArray *)recipients;
 - (void)addEventType:(NSString *)type handler:(JBEventHandlerBlock)handler;
+- (JBUser *)userForSocket:(GCDAsyncSocket *)socket;
 
 @end
 
 @implementation JBIMServer
 @synthesize listenSocket = _listenSocket;
-@synthesize clientSockets = _clientSockets;
+@synthesize connectedClients = _connectedClients;
 @synthesize reactors = _reactors;
 
 
 - (void)startServer {
 	
-	self.clientSockets = [NSMutableArray array];
+	self.connectedClients = [NSMutableArray array];
 	self.reactors = [NSMutableDictionary dictionary];
 	
 	self.listenSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
@@ -51,27 +53,75 @@ typedef JBMessage *(^JBEventHandlerBlock)(id event);
 	NSLog(@"Server socket started!");
 	
 	
+	
+	__block __typeof__(self) blockSelf = self;
 	// Add event handlers for different message types
-	[self addEventType:kJBMessageHeaderTypeLogin handler:^JBMessage *(id event) {
-		//JBMessage *message = [event message];
-		return nil;
+	[self addEventType:kJBMessageHeaderTypeLogin handler:^JBMessage *(JBMessage *message, JBUser *user) {
+		user.userName = [[message body] valueForKey:kJBMessageBodyTypeSender];
+		
+		NSMutableArray *otherUsers = [NSMutableArray arrayWithArray:blockSelf.connectedClients];
+		[otherUsers removeObject:user];
+		
+		NSArray *remainingUserNames = [otherUsers valueForKey:@"userName"];
+		
+		
+		NSDictionary *header = [NSDictionary dictionaryWithObject:kJBMessageHeaderTypeLogin forKey:kJBMessageHeaderType];
+		NSDictionary *body = [NSDictionary dictionaryWithObjectsAndKeys:user.userName, kJBMessageBodyTypeSender, remainingUserNames, kJBMessageBodyTypeUsers, nil];
+		
+		JBMessage *response = [JBMessage messageWithHeader:header body:body];
+		
+		return response;
 	}];
 	
 }
 
 
-- (JBMessage *)responseMessageByProcessingMessage:(JBMessage *)message {
-	
-	
-	// Figure out what type of message this is, and create an appropriate response
-	
+- (JBUser *)userForSocket:(GCDAsyncSocket *)socket {
+	for (JBUser *user in self.connectedClients) {
+		if (socket == user.socket)
+			return user;
+	}
 	
 	return nil;
 }
 
 
-- (NSArray *)recipientsForSourceMessage:(JBMessage *)message {
+- (JBUser *)userForUserName:(NSString *)userName {
+	for (JBUser *user in self.connectedClients) {
+		if ([user.userName isEqualToString:userName])
+			return user;
+	}
+	
 	return nil;
+}
+
+
+- (JBMessage *)responseMessageByProcessingMessage:(JBMessage *)message user:(JBUser *)user {
+	
+	
+	// Figure out what type of message this is, and create an appropriate response
+	JBEventHandlerBlock block = [self.reactors objectForKey:[[message valueForKeyPath:@"header.type"] uppercaseString]];
+	
+	JBMessage *response = nil;
+	if (nil != block) {
+		response = block(message, user);
+	}
+	
+	
+	return response;
+}
+
+
+- (NSArray *)recipientsForSourceMessage:(JBMessage *)message {
+	
+	
+	// If the message is a TEXT message, then only send the response to its recepient
+	if ([[[message valueForKeyPath:@"header.type"] uppercaseString] isEqualToString:kJBMessageHeaderTypeText]) {
+		return [NSArray arrayWithObject:[[self userForUserName:[message valueForKeyPath:@"body.receiver"]] socket]];
+	}
+	
+	// Otherwise send it to all users
+	return [self.connectedClients valueForKeyPath:@"socket"];
 }
 
 
@@ -94,12 +144,10 @@ typedef JBMessage *(^JBEventHandlerBlock)(id event);
 	
 	NSLog(@"Server: Accepted a new client socket.");
 	
-	[self.clientSockets addObject:newSocket];
+	JBUser *newUser = [[JBUser alloc] init];
+	newUser.socket = newSocket;
+	[self.connectedClients addObject:newUser];
 	
-	
-	// Set up some data to go along with that client's socket. We can pull this out later when the user has logged in.
-	NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-	[newSocket setUserData:dictionary];
 	
 	// Get the new socket to start reading.. we're trying to listen for the client's login message
 	[newSocket readDataWithTimeout:-1 tag:kClientSocketReadTag];
@@ -119,9 +167,12 @@ typedef JBMessage *(^JBEventHandlerBlock)(id event);
 			// Read the object
 			JBMessage *message = [JBMessage messageWithJSONData:data];
 			// Process it
-			JBMessage *response = [self responseMessageByProcessingMessage:message];
+			JBMessage *response = [self responseMessageByProcessingMessage:message user:[self userForSocket:sock]];
 			// Write a response
 			[self writeResponse:response toRecipients:[self recipientsForSourceMessage:message]];
+			
+			// Tell it to read for the next message from this client
+			[sock readDataWithTimeout:-1 tag:kClientSocketReadTag];
 			break;
 			
 		}
@@ -145,7 +196,7 @@ typedef JBMessage *(^JBEventHandlerBlock)(id event);
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
 	if (sock != self.listenSocket) {
 		NSLog(@"A client has disconnected");
-		[self.clientSockets removeObject:sock];
+		[self.connectedClients removeObject:sock];
 		
 		// Now inform every other client this one has disconnected....
 	}

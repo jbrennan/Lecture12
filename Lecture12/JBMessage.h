@@ -10,6 +10,12 @@
 
 extern NSString *const kJBMessageHeaderType;
 extern NSString *const kJBMessageHeaderTypeLogin;
+extern NSString *const kJBMessageTypeLogout;
+extern NSString *const kJBMessageHeaderTypeText;
+extern NSString *const kJBMessageBodyTypeSender;
+extern NSString *const kJBMessageBodyTypeUsers;
+extern NSString *const kJBMessageBodyTypeReceiver;
+extern NSString *const kJBMessageBodyTypeMessage;
 
 @interface JBMessage : NSObject
 
