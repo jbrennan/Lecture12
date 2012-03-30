@@ -29,6 +29,8 @@
 		CD60BE9B150952160000AD67 /* JBPersonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */; };
 		CD82C9E7152212D700E46D8D /* JBChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CD82C9E6152212D700E46D8D /* JBChatMessage.m */; };
 		CD82C9EC1522139600E46D8D /* JBChatRoom.m in Sources */ = {isa = PBXBuildFile; fileRef = CD82C9EB1522139600E46D8D /* JBChatRoom.m */; };
+		CD82C9F01522181600E46D8D /* JBChatTableViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CD82C9EE1522181600E46D8D /* JBChatTableViewViewController.m */; };
+		CD82C9F11522181600E46D8D /* JBChatTableViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD82C9EF1522181600E46D8D /* JBChatTableViewViewController.xib */; };
 		CD8C7D49151F93380075CAAF /* JBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C7D48151F93380075CAAF /* JBMessage.m */; };
 		CD8C7D4D151FE0000075CAAF /* JBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C7D4C151FE0000075CAAF /* JBUser.m */; };
 		CDA1499F150FD2040022608B /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA1499E150FD2040022608B /* cat.png */; };
@@ -76,6 +78,9 @@
 		CD82C9E6152212D700E46D8D /* JBChatMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChatMessage.m; sourceTree = "<group>"; };
 		CD82C9EA1522139600E46D8D /* JBChatRoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChatRoom.h; sourceTree = "<group>"; };
 		CD82C9EB1522139600E46D8D /* JBChatRoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChatRoom.m; sourceTree = "<group>"; };
+		CD82C9ED1522181600E46D8D /* JBChatTableViewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBChatTableViewViewController.h; sourceTree = "<group>"; };
+		CD82C9EE1522181600E46D8D /* JBChatTableViewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBChatTableViewViewController.m; sourceTree = "<group>"; };
+		CD82C9EF1522181600E46D8D /* JBChatTableViewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JBChatTableViewViewController.xib; sourceTree = "<group>"; };
 		CD8C7D47151F93380075CAAF /* JBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBMessage.h; sourceTree = "<group>"; };
 		CD8C7D48151F93380075CAAF /* JBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBMessage.m; sourceTree = "<group>"; };
 		CD8C7D4B151FE0000075CAAF /* JBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBUser.h; sourceTree = "<group>"; };
@@ -194,6 +199,9 @@
 				CD82C9E6152212D700E46D8D /* JBChatMessage.m */,
 				CD82C9EA1522139600E46D8D /* JBChatRoom.h */,
 				CD82C9EB1522139600E46D8D /* JBChatRoom.m */,
+				CD82C9ED1522181600E46D8D /* JBChatTableViewViewController.h */,
+				CD82C9EE1522181600E46D8D /* JBChatTableViewViewController.m */,
+				CD82C9EF1522181600E46D8D /* JBChatTableViewViewController.xib */,
 			);
 			name = "Chat Stuff";
 			sourceTree = "<group>";
@@ -255,6 +263,7 @@
 				CD60BE901509423B0000AD67 /* JBDetailViewController.xib in Resources */,
 				CDA1499F150FD2040022608B /* cat.png in Resources */,
 				CDD35A2C15124AF300AF2D7E /* JBMessageViewController.xib in Resources */,
+				CD82C9F11522181600E46D8D /* JBChatTableViewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +292,7 @@
 				CD8C7D4D151FE0000075CAAF /* JBUser.m in Sources */,
 				CD82C9E7152212D700E46D8D /* JBChatMessage.m in Sources */,
 				CD82C9EC1522139600E46D8D /* JBChatRoom.m in Sources */,
+				CD82C9F01522181600E46D8D /* JBChatTableViewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

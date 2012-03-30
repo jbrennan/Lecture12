@@ -9,19 +9,24 @@
 #import "JBIMRoomsTableViewController.h"
 #import "JBIMClient.h"
 #import "JBMessage.h"
+#import "JBChatTableViewViewController.h"
+#import "JBChatRoom.h"
 
 
 @interface JBIMRoomsTableViewController () <NSNetServiceDelegate>
 
 @property (nonatomic, strong) JBIMClient *networkClient;
-@property (nonatomic, strong) NSMutableArray *loggedInUsers;
+@property (nonatomic, strong) NSMutableArray *chats;
+
+- (void)addChatRoomForUser:(NSString *)user;
+- (void)removeChatRoomForUser:(NSString *)user;
 
 @end
 
 @implementation JBIMRoomsTableViewController
 @synthesize networkClient = _networkClient;
 @synthesize netService = _netService;
-@synthesize loggedInUsers = _loggedInUsers;
+@synthesize chats = _chats;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -31,6 +36,7 @@
 	[super viewDidLoad];
 	
 	self.title = @"Users";
+	self.chats = [NSMutableArray array];
 	
 }
 
@@ -62,7 +68,11 @@
 		
 		// Now logged in, update the room with a list of users
 		NSMutableArray *users = [NSMutableArray arrayWithArray:[[responseMessage body] valueForKey:kJBMessageBodyTypeUsers]];
-		self.loggedInUsers = users;
+		
+		for (NSString *user in users) {
+			[self addChatRoomForUser:user];
+		}
+		
 		NSLog(@"%@ Login succeeded, got users: %@", userName, users);
 		[self.tableView reloadData];
 		
@@ -70,6 +80,19 @@
 		
 		// The list has either grown or shrunk. We need to update our view accordingly
 		NSLog(@"Users changed!");
+		
+		
+		NSString *header = [[responseMessage header] valueForKey:kJBMessageHeaderType];
+		if ([header isEqualToString:kJBMessageHeaderTypeLogin]) {
+			// it's a login, so look for the new user!
+			[self addChatRoomForUser:[[responseMessage body] valueForKey:kJBMessageBodyTypeSender]];
+		} else {
+			// it's a logout, so see who's logged out and remove them
+			[self removeChatRoomForUser:[[responseMessage body] valueForKey:kJBMessageBodyTypeSender]];
+		}
+		
+		[self.tableView reloadData];
+		
 		
 		
 	} textMessageReceivedCallback:^(JBMessage *responseMessage) {
@@ -93,6 +116,29 @@
 }
 
 
+- (void)addChatRoomForUser:(NSString *)user {
+	JBChatRoom *room = [[JBChatRoom alloc] init];
+	room.recipient = user;
+	[self.chats addObject:room];
+}
+
+
+- (void)removeChatRoomForUser:(NSString *)user {
+	JBChatRoom *toRemove = nil;
+	for (JBChatRoom *room in self.chats) {
+		if ([room.recipient isEqualToString:user]) {
+			toRemove = room;
+			break;
+		}
+	}
+	
+	if (nil != toRemove) {
+		[self.chats removeObject:toRemove];
+		// Post a notification that this user has now gone offline?
+	}
+}
+
+
 #pragma mark -
 #pragma mark Table view data source
 
@@ -102,7 +148,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [self.loggedInUsers count];
+	return [self.chats count];
 }
 
 
@@ -117,7 +163,7 @@
     }
     
     
-    cell.textLabel.text = [[self.loggedInUsers objectAtIndex:indexPath.row] description];
+    cell.textLabel.text = [[self.chats objectAtIndex:indexPath.row] recipient];
 	
     return cell;
 }
@@ -129,14 +175,9 @@
 #pragma mark Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    NSDictionary *d = [NSDictionary dictionaryWithObject:@"HALLO" forKey:@"greeting"];
-//	NSData *data = [NSJSONSerialization dataWithJSONObject:d options:kNilOptions error:NULL];
-//	
-//	[self.communicationClient sendMessage:data];
 	
-	
-
-
+	JBChatTableViewViewController *chatController = [[JBChatTableViewViewController alloc] initWithNibName:@"JBChatTableViewViewController" bundle:nil];
+	[self.navigationController pushViewController:chatController animated:YES];
 	
 }
 
