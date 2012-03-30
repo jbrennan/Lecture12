@@ -7,6 +7,11 @@
 //
 
 #import "JBChatTableViewViewController.h"
+#import "JBChatRoom.h"
+#import "JBChatMessage.h"
+#import "JBIMClient.h"
+#import "JBMessage.h"
+
 
 @interface JBChatTableViewViewController ()
 
@@ -19,6 +24,7 @@
 @synthesize textField = _textField;
 @synthesize chatRoom = _chatRoom;
 @synthesize client = _client;
+@synthesize userName = _userName;
 
 
 
@@ -47,6 +53,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 	
+	
+	// Also listen for a notification signalling a new chat message has arrived
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageHasArrived:) name:JBChatRoomDidAddMessageNotification object:nil];
+	
 }
 
 
@@ -60,6 +70,12 @@
 	[super viewWillDisappear:animated];
 	
 	[self.textField resignFirstResponder];
+}
+
+
+- (void)messageHasArrived:(NSNotification *)sender {
+	NSLog(@"Heard notification about new message arriving. Reloading the tableView");
+	[self.tableView reloadData];
 }
 
 
@@ -117,6 +133,7 @@
     NSValue *animationDurationValue = [userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey];
     NSTimeInterval animationDuration;
     [animationDurationValue getValue:&animationDuration];
+	NSNumber *animationCurveNumber = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
     
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:animationDuration];
@@ -124,6 +141,20 @@
     self.tableView.frame = self.view.bounds;
     
     [UIView commitAnimations];
+	
+	
+	[UIView animateWithDuration:animationDuration delay:0 options:[animationCurveNumber integerValue] animations:^{
+		CGRect b = self.view.bounds;
+		CGRect tableFrame = b;
+		tableFrame.size.height -= self.keyboardView.bounds.size.height;
+		
+		CGRect k = self.keyboardView.bounds;
+		k.origin.y = tableFrame.size.height;
+		
+		self.tableView.frame = tableFrame;
+		self.keyboardView.frame = k;
+	} completion:nil];
+	
 }
 
 
@@ -137,7 +168,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return 5;
+	return [[self.chatRoom chatMessages] count];
 }
 
 
@@ -151,8 +182,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
+	JBChatMessage *message = [self.chatRoom.chatMessages objectAtIndex:indexPath.row];
+	
     
-    cell.textLabel.text = @"Some message!";
+    cell.textLabel.text = message.text;
 	
     return cell;
 }
@@ -171,13 +204,80 @@
 
 
 - (IBAction)sendMessageWasPressed:(UIButton *)sender {
+	if (![self.textField.text length])
+		return;
+	
+	
 	NSLog(@"Lets send a message!");
+	
+	NSDictionary *header = [NSDictionary dictionaryWithObject:kJBMessageHeaderTypeText forKey:kJBMessageHeaderType];
+	NSDictionary *body = [NSDictionary dictionaryWithObjectsAndKeys:self.userName, kJBMessageBodyTypeSender, self.chatRoom.recipient, kJBMessageBodyTypeReceiver, self.textField.text, kJBMessageBodyTypeMessage, nil];
+	
+	JBMessage *message = [JBMessage messageWithHeader:header body:body];
+	
+	[self.client sendMessage:message withCallbackHandler:^(JBMessage *responseMessage) {
+		NSLog(@"Got the callback");
+		[self.tableView reloadData];
+	}];
+	
+	
+	// Also, add this message to our chatroom object
+	JBChatMessage *chat = [[JBChatMessage alloc] init];
+	chat.text = self.textField.text;
+	chat.timestamp = [NSDate date];
+	chat.sender = self.userName;
+	chat.recipient = self.chatRoom.recipient;
+	chat.read = YES;
+	
+	[self.chatRoom addChatMessagesObject:chat];
+	[self.tableView reloadData];
+	NSIndexPath *path = [NSIndexPath indexPathForRow:[self.chatRoom.chatMessages count] - 1 inSection:0];
+	[self.tableView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	
+	self.textField.text = @"";
+	
 }
 
 
 //- (BOOL)textFieldShouldReturn:(UITextField *)textField {
 //	return NO;
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @end

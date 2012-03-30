@@ -23,6 +23,7 @@
 @end
 
 NSString *kIMServiceName = @"_im._tcp.";
+NSString *kIMServiceDomain = @"local"; // If I leave this blank, then the Simulator finds 2 entries.. One for the local domain, and one for the iCloud domain (BTMM = Back To My Mac)... WE DON'T WANT THAT.
 
 @implementation JBServicesBrowser {
 	BOOL _alreadyConnected;
@@ -59,7 +60,7 @@ NSString *kIMServiceName = @"_im._tcp.";
 	
 	[self setupNetworkService];
 	
-	self.publishedService = [[NSNetService alloc] initWithDomain:@"" type:kIMServiceName name:serviceName port:DEFAULT_PORT];
+	self.publishedService = [[NSNetService alloc] initWithDomain:kIMServiceDomain type:kIMServiceName name:serviceName port:DEFAULT_PORT];
 	
 	if (nil == self.publishedService) {
 		NSLog(@"There was an error publishing the service!");
@@ -78,7 +79,7 @@ NSString *kIMServiceName = @"_im._tcp.";
 	self.servicesBrowser = [[NSNetServiceBrowser alloc] init];
 	
 	[self.servicesBrowser setDelegate:self];
-	[self.servicesBrowser searchForServicesOfType:kIMServiceName inDomain:@""];
+	[self.servicesBrowser searchForServicesOfType:kIMServiceName inDomain:kIMServiceDomain];
 }
 
 
@@ -134,6 +135,7 @@ NSString *kIMServiceName = @"_im._tcp.";
 - (void)netServiceBrowser:(NSNetServiceBrowser *)aNetServiceBrowser didFindService:(NSNetService *)aNetService moreComing:(BOOL)moreComing {
 	
 	[self.foundServices addObject:aNetService];
+	NSLog(@"Found a service: %@", aNetService);
 	self.servicesCallback(self.foundServices, moreComing, nil);
 	
 }

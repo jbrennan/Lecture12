@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
+extern NSString *const JBChatRoomDidAddMessageNotification; // Posted when a new message gets added to the chat room
+
 @class JBChatMessage;
 @interface JBChatRoom : NSObject
 

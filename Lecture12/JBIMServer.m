@@ -73,6 +73,17 @@ typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 		return response;
 	}];
 	
+	
+	[self addEventType:kJBMessageHeaderTypeText handler:^JBMessage *(JBMessage *message, JBUser *user) {
+		// A message from `user`, being sent to the message's recepient...
+		
+		
+		// Just return the message itself. We'll indicate later that it needs to be delivered to the recipient
+		NSLog(@"Server is processing a TEXT message... just going to return it so it can be delivered");
+		return message;
+		
+	}];
+	
 }
 
 

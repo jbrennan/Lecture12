@@ -11,12 +11,14 @@
 #import "JBMessage.h"
 #import "JBChatTableViewViewController.h"
 #import "JBChatRoom.h"
+#import "JBChatMessage.h"
 
 
 @interface JBIMRoomsTableViewController () <NSNetServiceDelegate>
 
 @property (nonatomic, strong) JBIMClient *networkClient;
 @property (nonatomic, strong) NSMutableArray *chats;
+@property (nonatomic, strong) NSString *userName;
 
 - (void)addChatRoomForUser:(NSString *)user;
 - (void)removeChatRoomForUser:(NSString *)user;
@@ -27,6 +29,7 @@
 @synthesize networkClient = _networkClient;
 @synthesize netService = _netService;
 @synthesize chats = _chats;
+@synthesize userName = _userName;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -62,8 +65,13 @@
 	NSData *info = [addresses objectAtIndex:0];
 	
 	self.networkClient = [[JBIMClient alloc] initWithHost:info];
-	NSInteger num = arc4random() % 10;
+	
+	
+	// Generate a random username, just so I can properly test this between the Simulator and my device
+	NSInteger num = arc4random() % 1000;
 	NSString *userName = [NSString stringWithFormat:@"Jason%d", num];
+	self.userName = userName;
+	
 	[self.networkClient startNetworkConnectionWithLoginName:userName loginCallbackHandler:^(JBMessage *responseMessage) {
 		
 		// Now logged in, update the room with a list of users
@@ -102,6 +110,19 @@
 		// Find the JBChat that corresponds to that user,
 		// Add the new message to that Chat
 		NSLog(@"We got a text message!");
+		NSString *senderUserName = [[responseMessage body] objectForKey:kJBMessageBodyTypeSender];
+		JBChatRoom *room = [self chatRoomForUser:senderUserName];
+		
+		// update the room with the latest chat message
+		JBChatMessage *newMessage = [[JBChatMessage alloc] init];
+		newMessage.sender = senderUserName;
+		newMessage.recipient = self.userName;
+		newMessage.timestamp = [NSDate date];
+		newMessage.text = [[responseMessage body] objectForKey:kJBMessageBodyTypeMessage];
+		[room addChatMessagesObject:newMessage];
+		
+		// Post a notification message
+		[[NSNotificationCenter defaultCenter] postNotificationName:JBChatRoomDidAddMessageNotification object:nil];
 		
 	}];
 	
@@ -119,6 +140,7 @@
 - (void)addChatRoomForUser:(NSString *)user {
 	JBChatRoom *room = [[JBChatRoom alloc] init];
 	room.recipient = user;
+	
 	[self.chats addObject:room];
 }
 
@@ -136,6 +158,17 @@
 		[self.chats removeObject:toRemove];
 		// Post a notification that this user has now gone offline?
 	}
+}
+
+
+- (JBChatRoom *)chatRoomForUser:(NSString *)username {
+	for (JBChatRoom *room in self.chats) {
+		if ([room.recipient isEqualToString:username])
+			return room;
+	}
+	
+	// didn't find the room
+	return nil;
 }
 
 
@@ -177,6 +210,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	
 	JBChatTableViewViewController *chatController = [[JBChatTableViewViewController alloc] initWithNibName:@"JBChatTableViewViewController" bundle:nil];
+	chatController.userName = self.userName;
+	chatController.client = self.networkClient;
+	chatController.chatRoom = [self.chats objectAtIndex:indexPath.row];
 	[self.navigationController pushViewController:chatController animated:YES];
 	
 }

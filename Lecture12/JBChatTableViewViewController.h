@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) JBChatRoom *chatRoom;
 @property (nonatomic, strong) JBIMClient *client;
+@property (nonatomic, strong) NSString *userName;
 
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
