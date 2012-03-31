@@ -33,6 +33,7 @@
 		CD82C9F11522181600E46D8D /* JBChatTableViewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD82C9EF1522181600E46D8D /* JBChatTableViewViewController.xib */; };
 		CD8C7D49151F93380075CAAF /* JBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C7D48151F93380075CAAF /* JBMessage.m */; };
 		CD8C7D4D151FE0000075CAAF /* JBUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8C7D4C151FE0000075CAAF /* JBUser.m */; };
+		CD8F065E1526A2E300B204BC /* JBImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CD8F065D1526A2E300B204BC /* JBImageCache.m */; };
 		CDA1499F150FD2040022608B /* cat.png in Resources */ = {isa = PBXBuildFile; fileRef = CDA1499E150FD2040022608B /* cat.png */; };
 		CDD35A2B15124AF300AF2D7E /* JBMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDD35A2915124AF300AF2D7E /* JBMessageViewController.m */; };
 		CDD35A2C15124AF300AF2D7E /* JBMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDD35A2A15124AF300AF2D7E /* JBMessageViewController.xib */; };
@@ -85,6 +86,8 @@
 		CD8C7D48151F93380075CAAF /* JBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBMessage.m; sourceTree = "<group>"; };
 		CD8C7D4B151FE0000075CAAF /* JBUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBUser.h; sourceTree = "<group>"; };
 		CD8C7D4C151FE0000075CAAF /* JBUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBUser.m; sourceTree = "<group>"; };
+		CD8F065C1526A2E300B204BC /* JBImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBImageCache.h; sourceTree = "<group>"; };
+		CD8F065D1526A2E300B204BC /* JBImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBImageCache.m; sourceTree = "<group>"; };
 		CDA1499E150FD2040022608B /* cat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cat.png; sourceTree = "<group>"; };
 		CDD35A2815124AF300AF2D7E /* JBMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JBMessageViewController.h; sourceTree = "<group>"; };
 		CDD35A2915124AF300AF2D7E /* JBMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JBMessageViewController.m; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				CD8C7D4B151FE0000075CAAF /* JBUser.h */,
 				CD8C7D4C151FE0000075CAAF /* JBUser.m */,
 				CD82C9E91522137B00E46D8D /* Chat Stuff */,
+				CD8F065C1526A2E300B204BC /* JBImageCache.h */,
+				CD8F065D1526A2E300B204BC /* JBImageCache.m */,
 			);
 			path = Lecture12;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				CD82C9E7152212D700E46D8D /* JBChatMessage.m in Sources */,
 				CD82C9EC1522139600E46D8D /* JBChatRoom.m in Sources */,
 				CD82C9F01522181600E46D8D /* JBChatTableViewViewController.m in Sources */,
+				CD8F065E1526A2E300B204BC /* JBImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -200,6 +200,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		cell.textLabel.adjustsFontSizeToFitWidth = YES;
     }
     
 	JBChatMessage *message = [self.chatRoom.chatMessages objectAtIndex:indexPath.row];

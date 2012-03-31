@@ -12,4 +12,5 @@
 @interface JBPersonTableViewCell : UITableViewCell
 @property (nonatomic, strong) JBPerson *person;
 @property (nonatomic, assign, getter = isLastNameBold) BOOL lastNameBold;
+@property (nonatomic, strong) UIImageView *userImageView;
 @end

@@ -12,6 +12,9 @@
 #import "JBChatTableViewViewController.h"
 #import "JBChatRoom.h"
 #import "JBChatMessage.h"
+#import "JBImageCache.h"
+#import "JBPersonTableViewCell.h"
+#import "JBPerson.h"
 
 
 @interface JBIMRoomsTableViewController () <NSNetServiceDelegate>
@@ -19,6 +22,7 @@
 @property (nonatomic, strong) JBIMClient *networkClient;
 @property (nonatomic, strong) NSMutableArray *chats;
 @property (nonatomic, strong) NSString *userName;
+@property (nonatomic, strong) JBImageCache *imageCache;
 
 - (void)addChatRoomForUser:(NSString *)user;
 - (void)removeChatRoomForUser:(NSString *)user;
@@ -30,6 +34,8 @@
 @synthesize netService = _netService;
 @synthesize chats = _chats;
 @synthesize userName = _userName;
+@synthesize imageCache = _imageCache;
+
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -40,6 +46,10 @@
 	
 	self.title = @"Users";
 	self.chats = [NSMutableArray array];
+	self.imageCache = [[JBImageCache alloc] init];
+	
+	self.tableView.rowHeight = 64.0f;
+	
 	
 }
 
@@ -190,13 +200,20 @@
     
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    JBPersonTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[JBPersonTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+		cell.lastNameBold = NO;
+		cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
-    
-    cell.textLabel.text = [[self.chats objectAtIndex:indexPath.row] recipient];
+    JBPerson *person = [[JBPerson alloc] init];
+	person.firstName = [[self.chats objectAtIndex:indexPath.row] recipient];
+	cell.person = person;
+
+	[self.imageCache loadImageForString:person.firstName completionHandler:^(NSString *string, UIImage *image) {
+		cell.userImageView.image = image;
+	}];
 	
     return cell;
 }

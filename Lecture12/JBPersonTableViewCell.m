@@ -26,6 +26,7 @@
 @synthesize lastNameLabel = _lastNameLabel;
 @synthesize lastNameBold = _lastNameBold;
 @synthesize phoneLabel = _phoneLabel;
+@synthesize userImageView = _userImageView;
 
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -43,9 +44,12 @@
 		self.phoneLabel.textColor = [UIColor lightTextColor];
 		self.phoneLabel.textAlignment = UITextAlignmentRight;
 		
+		self.userImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+		
 		[self.contentView addSubview:self.firstNameLabel];
 		[self.contentView addSubview:self.lastNameLabel];
 		[self.contentView addSubview:self.phoneLabel];
+		[self.contentView addSubview:self.userImageView];
 		
 		self.lastNameBold = YES;
 		
@@ -70,7 +74,7 @@
 
 
 - (void)commonHighlighting:(BOOL)selected {
-	UIColor *backgroundColor = [UIColor whiteColor];
+	UIColor *backgroundColor = [UIColor clearColor];
 	UIColor *textColor = [UIColor darkTextColor];
 	UIColor *phoneColor = [UIColor lightGrayColor];
 	
@@ -108,7 +112,15 @@
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
-	CGRect r = CGRectInset(self.contentView.bounds, 10, 10);
+	CGRect b = self.contentView.bounds;
+	b.size.width = b.size.height; // make it a square
+	self.userImageView.frame = b;
+	
+	CGRect remaining = self.contentView.bounds;
+	remaining.size.width -= b.size.width;
+	remaining.origin.x = b.size.width;
+	
+	CGRect r = CGRectInset(remaining, 10, 10);
 	CGRect f = r;
 	
 	[self.firstNameLabel sizeToFit];
@@ -124,10 +136,12 @@
 	f.size.width = self.lastNameLabel.bounds.size.width;
 	self.lastNameLabel.frame = f;
 	
-	CGRect b = self.phoneLabel.bounds;
+	b = self.phoneLabel.bounds;
 	f.origin.x = r.size.width - b.size.width;
 	f.size.width = b.size.width;
 	self.phoneLabel.frame = f;
+	
+	
 	
 	
 	
