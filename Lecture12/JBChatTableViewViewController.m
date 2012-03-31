@@ -46,7 +46,7 @@
 - (void)viewDidLoad {
 	[super viewDidLoad];
 	
-	self.title = @"Chat";
+	self.title = self.chatRoom.recipient;
 	
 	//self.textField.inputAccessoryView = self.keyboardView;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -76,6 +76,9 @@
 - (void)messageHasArrived:(NSNotification *)sender {
 	NSLog(@"Heard notification about new message arriving. Reloading the tableView");
 	[self.tableView reloadData];
+	NSIndexPath *path = [NSIndexPath indexPathForRow:[self.chatRoom.chatMessages count] - 1 inSection:0];
+	[self.tableView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:YES];
+	[self.tableView flashScrollIndicators];
 }
 
 
@@ -135,12 +138,6 @@
     [animationDurationValue getValue:&animationDuration];
 	NSNumber *animationCurveNumber = [userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:animationDuration];
-    
-    self.tableView.frame = self.view.bounds;
-    
-    [UIView commitAnimations];
 	
 	
 	[UIView animateWithDuration:animationDuration delay:0 options:[animationCurveNumber integerValue] animations:^{
@@ -184,6 +181,7 @@
     
 	JBChatMessage *message = [self.chatRoom.chatMessages objectAtIndex:indexPath.row];
 	
+	cell.textLabel.textAlignment = [message.recipient isEqualToString:self.userName]? UITextAlignmentLeft : UITextAlignmentRight;
     
     cell.textLabel.text = message.text;
 	
@@ -216,7 +214,7 @@
 	JBMessage *message = [JBMessage messageWithHeader:header body:body];
 	
 	[self.client sendMessage:message withCallbackHandler:^(JBMessage *responseMessage) {
-		NSLog(@"Got the callback");
+		NSLog(@"Chat message successfully sent.");
 		[self.tableView reloadData];
 	}];
 	

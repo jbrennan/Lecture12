@@ -72,11 +72,25 @@
 - (void)sendMessage:(JBMessage *)message withCallbackHandler:(JBIMClientMessageCallback)callback {
 	NSData *data = [message JSONData];
 	
-	long identifierTag = (arc4random() % 5000) + IN_CALLBACK_RANGE;
-	[self.messageCallbackHandlers setValue:[callback copy] forKey:[NSString stringWithFormat:@"%l", identifierTag]];
-	
+	// write the data
 	[self.clientSocket writeData:data withTimeout:-1 tag:kMessageSentTag];
-	[self.clientSocket readDataWithTimeout:-1 tag:identifierTag];
+	
+	// If the message being sent is of type TEXT then we don't need to execute the callback handler later on and we don't need to q up a read
+	if ([[[message header] valueForKey:@"type"] isEqualToString:kJBMessageHeaderTypeText]) {
+		// execute the handler now
+		callback(message);
+		
+		
+	} else {
+		
+		// Otherwise, store the handler, and q up a response read.
+		
+		long identifierTag = (arc4random() % 5000) + IN_CALLBACK_RANGE;
+		[self.messageCallbackHandlers setValue:[callback copy] forKey:[NSString stringWithFormat:@"%l", identifierTag]];
+		[self.clientSocket readDataWithTimeout:-1 tag:identifierTag];
+	}
+
+	
 }
 
 

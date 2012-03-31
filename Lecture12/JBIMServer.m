@@ -84,6 +84,18 @@ typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 		
 	}];
 	
+	
+	[self addEventType:kJBMessageHeaderTypeLogout handler:^JBMessage *(JBMessage *message, JBUser *user) {
+		
+		// Remove that user logging out
+		[self.connectedClients removeObject:user];
+		
+		NSDictionary *header = [NSDictionary dictionaryWithObject:kJBMessageHeaderTypeLogout forKey:kJBMessageHeaderType];
+		NSDictionary *body = [NSDictionary dictionaryWithObjectsAndKeys:user.userName, kJBMessageBodyTypeSender, nil];
+		
+		return [JBMessage messageWithHeader:header body:body];
+	}];
+	
 }
 
 
@@ -128,8 +140,18 @@ typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 	
 	// If the message is a TEXT message, then only send the response to its recepient
 	if ([[[message valueForKeyPath:@"header.type"] uppercaseString] isEqualToString:kJBMessageHeaderTypeText]) {
+		NSLog(@"SERVER:::::::TEXTTTTTTTTTTTTTTTTTTTTTT\n\n\n\n");
 		return [NSArray arrayWithObject:[[self userForUserName:[message valueForKeyPath:@"body.receiver"]] socket]];
 	}
+	
+	
+//	if ([[[message valueForKeyPath:@"header.type"] uppercaseString] isEqualToString:kJBMessageHeaderTypeLogout]) {
+//		
+//		NSMutableArray *sockets = [NSMutableArray arrayWithArray:[self.connectedClients valueForKey:@"socket"]];
+//		[sockets removeObject:[[self userForUserName:[message valueForKeyPath:@"body.receiver"]] socket]];
+//		
+//		return [NSArray arrayWithArray:sockets];
+//	}
 	
 	// Otherwise send it to all users
 	return [self.connectedClients valueForKeyPath:@"socket"];
@@ -169,7 +191,7 @@ typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
 	// Assume it's all JSON Data
 	
-	NSLog(@"Gonna readddddd %lu", tag);
+	NSLog(@"Gonna readddddd %lu for use %@", tag, [[self userForSocket:sock] userName]);
 	
 	
 	switch (tag) {
@@ -208,8 +230,7 @@ typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 	if (sock != self.listenSocket) {
 		NSLog(@"A client has disconnected");
 		[self.connectedClients removeObject:sock];
-		
-		// Now inform every other client this one has disconnected....
+
 	}
 }
 
