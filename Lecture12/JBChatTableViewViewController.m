@@ -13,6 +13,29 @@
 #import "JBMessage.h"
 
 
+@interface JBKeyboardView : UIView
+@end
+
+@implementation JBKeyboardView
+
+- (void)drawRect:(CGRect)rect {
+	CGRect line = self.bounds;
+	line.size.height = 1.0f;
+	
+	CGContextRef context = UIGraphicsGetCurrentContext();
+	[[UIColor darkTextColor] set];
+	
+	CGContextFillRect(context, line);
+	line.origin.y += 1.0f;
+	
+	[[UIColor colorWithWhite:1.0f alpha:0.6f] set];
+	CGContextFillRect(context, line);
+}
+
+@end
+
+
+
 @interface JBChatTableViewViewController ()
 
 @end
