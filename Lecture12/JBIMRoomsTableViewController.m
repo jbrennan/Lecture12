@@ -107,6 +107,10 @@
 		} else {
 			// it's a logout, so see who's logged out and remove them
 			[self removeChatRoomForUser:[[responseMessage body] valueForKey:kJBMessageBodyTypeSender]];
+			
+			// Notify any open rooms, too
+			NSNotification *note = [NSNotification notificationWithName:JBChatRoomDidCloseNotification object:[[responseMessage body] valueForKey:kJBMessageBodyTypeSender]];
+			[[NSNotificationCenter defaultCenter] postNotification:note];
 		}
 		
 		[self.tableView reloadData];

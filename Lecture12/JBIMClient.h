@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
+extern NSString *const JBIMClientApplicationClosingNotification;
+
 @class JBMessage;
 
 typedef void(^JBIMClientMessageCallback)(JBMessage *responseMessage);

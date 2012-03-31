@@ -146,42 +146,22 @@
 			children = (
 				CD60BE821509423B0000AD67 /* JBAppDelegate.h */,
 				CD60BE831509423B0000AD67 /* JBAppDelegate.m */,
-				CD60BE851509423B0000AD67 /* JBMasterViewController.h */,
-				CD60BE861509423B0000AD67 /* JBMasterViewController.m */,
-				CD60BE881509423B0000AD67 /* JBDetailViewController.h */,
-				CD60BE891509423B0000AD67 /* JBDetailViewController.m */,
-				CD60BE8B1509423B0000AD67 /* JBMasterViewController.xib */,
-				CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */,
-				CD60BE7A1509423B0000AD67 /* Supporting Files */,
+				CD5827B3151914680026E10A /* JBServicesBrowserTableViewController.h */,
+				CD5827B4151914680026E10A /* JBServicesBrowserTableViewController.m */,
+				CD1F02F0151D0886008DD98A /* JBIMRoomsTableViewController.h */,
+				CD1F02F1151D0886008DD98A /* JBIMRoomsTableViewController.m */,
+				CD8F06601526B0E100B204BC /* Network layer */,
+				CD82C9E91522137B00E46D8D /* Chat Stuff */,
+				CD8F065C1526A2E300B204BC /* JBImageCache.h */,
+				CD8F065D1526A2E300B204BC /* JBImageCache.m */,
+				CD8C7D4B151FE0000075CAAF /* JBUser.h */,
+				CD8C7D4C151FE0000075CAAF /* JBUser.m */,
 				CD60BE96150943AB0000AD67 /* JBPerson.h */,
 				CD60BE97150943AB0000AD67 /* JBPerson.m */,
 				CD60BE99150952160000AD67 /* JBPersonTableViewCell.h */,
 				CD60BE9A150952160000AD67 /* JBPersonTableViewCell.m */,
-				CDA1499E150FD2040022608B /* cat.png */,
-				CDD35A2815124AF300AF2D7E /* JBMessageViewController.h */,
-				CDD35A2915124AF300AF2D7E /* JBMessageViewController.m */,
-				CDD35A2A15124AF300AF2D7E /* JBMessageViewController.xib */,
-				CDD35A2E15124E7100AF2D7E /* JBCommunicationController.h */,
-				CDD35A2F15124E7100AF2D7E /* JBCommunicationController.m */,
-				CD5827B3151914680026E10A /* JBServicesBrowserTableViewController.h */,
-				CD5827B4151914680026E10A /* JBServicesBrowserTableViewController.m */,
-				CD125E36151BD0CF00419F2A /* JBServicesBrowser.h */,
-				CD125E37151BD0CF00419F2A /* JBServicesBrowser.m */,
-				CD1F02F0151D0886008DD98A /* JBIMRoomsTableViewController.h */,
-				CD1F02F1151D0886008DD98A /* JBIMRoomsTableViewController.m */,
-				CD1F02F4151D0B9B008DD98A /* GCDAsyncSocket.h */,
-				CD1F02F5151D0B9B008DD98A /* GCDAsyncSocket.m */,
-				CD1F02FB151D1104008DD98A /* JBIMServer.h */,
-				CD1F02FC151D1104008DD98A /* JBIMServer.m */,
-				CD1F02FE151D25BF008DD98A /* JBIMClient.h */,
-				CD1F02FF151D25BF008DD98A /* JBIMClient.m */,
-				CD8C7D47151F93380075CAAF /* JBMessage.h */,
-				CD8C7D48151F93380075CAAF /* JBMessage.m */,
-				CD8C7D4B151FE0000075CAAF /* JBUser.h */,
-				CD8C7D4C151FE0000075CAAF /* JBUser.m */,
-				CD82C9E91522137B00E46D8D /* Chat Stuff */,
-				CD8F065C1526A2E300B204BC /* JBImageCache.h */,
-				CD8F065D1526A2E300B204BC /* JBImageCache.m */,
+				CD8F06611526B12400B204BC /* Unused in Project */,
+				CD60BE7A1509423B0000AD67 /* Supporting Files */,
 			);
 			path = Lecture12;
 			sourceTree = "<group>";
@@ -209,6 +189,42 @@
 				CD82C9EF1522181600E46D8D /* JBChatTableViewViewController.xib */,
 			);
 			name = "Chat Stuff";
+			sourceTree = "<group>";
+		};
+		CD8F06601526B0E100B204BC /* Network layer */ = {
+			isa = PBXGroup;
+			children = (
+				CD125E36151BD0CF00419F2A /* JBServicesBrowser.h */,
+				CD125E37151BD0CF00419F2A /* JBServicesBrowser.m */,
+				CD1F02FB151D1104008DD98A /* JBIMServer.h */,
+				CD1F02FC151D1104008DD98A /* JBIMServer.m */,
+				CD1F02FE151D25BF008DD98A /* JBIMClient.h */,
+				CD1F02FF151D25BF008DD98A /* JBIMClient.m */,
+				CD8C7D47151F93380075CAAF /* JBMessage.h */,
+				CD8C7D48151F93380075CAAF /* JBMessage.m */,
+				CD1F02F4151D0B9B008DD98A /* GCDAsyncSocket.h */,
+				CD1F02F5151D0B9B008DD98A /* GCDAsyncSocket.m */,
+			);
+			name = "Network layer";
+			sourceTree = "<group>";
+		};
+		CD8F06611526B12400B204BC /* Unused in Project */ = {
+			isa = PBXGroup;
+			children = (
+				CDD35A2E15124E7100AF2D7E /* JBCommunicationController.h */,
+				CDD35A2F15124E7100AF2D7E /* JBCommunicationController.m */,
+				CDA1499E150FD2040022608B /* cat.png */,
+				CDD35A2815124AF300AF2D7E /* JBMessageViewController.h */,
+				CDD35A2915124AF300AF2D7E /* JBMessageViewController.m */,
+				CDD35A2A15124AF300AF2D7E /* JBMessageViewController.xib */,
+				CD60BE851509423B0000AD67 /* JBMasterViewController.h */,
+				CD60BE861509423B0000AD67 /* JBMasterViewController.m */,
+				CD60BE881509423B0000AD67 /* JBDetailViewController.h */,
+				CD60BE891509423B0000AD67 /* JBDetailViewController.m */,
+				CD60BE8B1509423B0000AD67 /* JBMasterViewController.xib */,
+				CD60BE8E1509423B0000AD67 /* JBDetailViewController.xib */,
+			);
+			name = "Unused in Project";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

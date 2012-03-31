@@ -10,8 +10,13 @@
 
 #import "JBMasterViewController.h"
 #import "JBServicesBrowserTableViewController.h"
+#import "JBIMClient.h"
 
-@implementation JBAppDelegate
+
+
+@implementation JBAppDelegate {
+	UIBackgroundTaskIdentifier _bgTask;
+}
 
 @synthesize window = _window;
 @synthesize navigationController = _navigationController;
@@ -28,6 +33,9 @@
 	self.navigationController = [[UINavigationController alloc] initWithRootViewController:services];
 	self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
+	
+	_bgTask = UIBackgroundTaskInvalid;
+	
     return YES;
 }
 
@@ -39,8 +47,27 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-	// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-	// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+	_bgTask = [application beginBackgroundTaskWithExpirationHandler:^{
+		[application endBackgroundTask:_bgTask];
+		_bgTask = UIBackgroundTaskInvalid;
+	}];
+	
+	
+	// Send the logout message and disconnect asynchronously
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
+		// post the notification object, which will be on this q's thread
+		// this happens synchronously on this q
+		[[NSNotificationCenter defaultCenter] postNotificationName:JBIMClientApplicationClosingNotification object:nil];
+		
+		dispatch_sync(dispatch_get_main_queue(),^() {
+			// Main Queue code
+			// we're done
+			[application endBackgroundTask:_bgTask];
+			_bgTask = UIBackgroundTaskInvalid;
+		});
+		
+	});
+	
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application

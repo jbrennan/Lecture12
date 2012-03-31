@@ -125,7 +125,7 @@ NSString *kIMServiceDomain = @"local"; // If I leave this blank, then the Simula
 
 
 - (void)teardownNetworkService {
-	
+	[self.hostedService stopServer];
 }
 
 

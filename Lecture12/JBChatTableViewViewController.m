@@ -79,6 +79,7 @@
 	
 	// Also listen for a notification signalling a new chat message has arrived
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messageHasArrived:) name:JBChatRoomDidAddMessageNotification object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(roomClosed:) name:JBChatRoomDidCloseNotification object:nil];
 	
 }
 
@@ -102,6 +103,16 @@
 	NSIndexPath *path = [NSIndexPath indexPathForRow:[self.chatRoom.chatMessages count] - 1 inSection:0];
 	[self.tableView scrollToRowAtIndexPath:path atScrollPosition:UITableViewScrollPositionTop animated:YES];
 	[self.tableView flashScrollIndicators];
+}
+
+
+- (void)roomClosed:(NSNotification *)sender {
+	NSString *roomName = [sender object];
+	
+	if ([roomName isEqualToString:self.chatRoom.recipient]) {
+		NSLog(@"The current room is closing");
+		[self.navigationController popViewControllerAnimated:YES];
+	}
 }
 
 

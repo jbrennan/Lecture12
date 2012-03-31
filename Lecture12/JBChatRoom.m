@@ -10,6 +10,7 @@
 #import "JBChatMessage.h"
 
 NSString *const JBChatRoomDidAddMessageNotification = @"JBChatRoomDidAddMessage";
+NSString *const JBChatRoomDidCloseNotification = @"JBChatRoomDidClose";
 
 @implementation JBChatRoom
 @synthesize chatMessages = _chatMessages;

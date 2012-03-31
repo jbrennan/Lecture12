@@ -11,5 +11,6 @@
 @interface JBIMServer : NSObject
 
 - (void)startServer;
+- (void)stopServer;
 
 @end

@@ -54,7 +54,7 @@ typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 	
 	
 	
-	__block __typeof__(self) blockSelf = self;
+	__block __typeof__(self) blockSelf = self; // avoids retain cycle
 	// Add event handlers for different message types
 	[self addEventType:kJBMessageHeaderTypeLogin handler:^JBMessage *(JBMessage *message, JBUser *user) {
 		user.userName = [[message body] valueForKey:kJBMessageBodyTypeSender];
@@ -168,6 +168,14 @@ typedef JBMessage *(^JBEventHandlerBlock)(JBMessage *message, JBUser *user);
 
 - (void)addEventType:(NSString *)type handler:(JBEventHandlerBlock)handler {
 	[self.reactors setValue:[handler copy] forKey:type];
+}
+
+
+- (void)stopServer {
+	NSLog(@"Stopping the Server");
+	[self.connectedClients removeAllObjects];
+	[self.listenSocket disconnect];
+	self.listenSocket = nil;
 }
 
 

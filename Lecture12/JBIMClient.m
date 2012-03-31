@@ -17,6 +17,9 @@
 #define IN_CALLBACK_RANGE 1000
 
 
+NSString *const JBIMClientApplicationClosingNotification = @"JBIMClientApplicationClosing";
+
+
 @interface JBIMClient () <GCDAsyncSocketDelegate>
 
 @property (nonatomic, strong) GCDAsyncSocket *clientSocket;
@@ -44,9 +47,32 @@
 		self.messageCallbackHandlers = [NSMutableDictionary dictionary];
 		self.clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
 		
+		// Register for a notification of the app closing so we can disconnect
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appIsClosing:) name:JBIMClientApplicationClosingNotification object:nil];
+		
 	}
 	
     return self;
+}
+
+
+- (void)dealloc {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (void)appIsClosing:(id)sender {
+	
+	NSDictionary *header = [NSDictionary dictionaryWithObject:kJBMessageHeaderTypeLogout forKey:kJBMessageHeaderType];
+	NSDictionary *body = [NSDictionary dictionaryWithObject:self.loginName forKey:kJBMessageBodyTypeSender];
+	
+	JBMessage *message = [JBMessage messageWithHeader:header body:body];
+	
+	[self sendMessage:message withCallbackHandler:^(JBMessage *responseMessage) {
+		NSLog(@"Logged out!");
+		
+	}];
+	[self.clientSocket disconnectAfterWriting];
 }
 
 

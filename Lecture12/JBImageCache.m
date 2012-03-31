@@ -9,6 +9,7 @@
 #import "JBImageCache.h"
 #import <dispatch/dispatch.h>
 
+// unicorns are way more fun than actual pictures. Plus, this works with any NSString you can throw at it, instead of hardcoded values on some server. Far more flexible, yeah?
 #define kImageURL @"http://unicornify.appspot.com/avatar/%@?s=128"
 
 @interface JBImageCache ()
@@ -31,6 +32,11 @@
 
 - (void)loadImageForString:(NSString *)string completionHandler:(JBImageCacheCompletionBlock)completionBlock {
 	
+	// The benefit to using GCD here is not only will this be done asyncronously,
+	// but all this code will be dispatched to different worker threads as they become available.
+	// Meaning, if we're trying to load a bunch of cells, GCD will maximize the number of threads
+	// and make best use of the available cores automatically.
+	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^() {
 		// Async code
 		UIImage *image = [self.cachedImages objectForKey:string];
@@ -41,6 +47,7 @@
 			NSString *urlString = [NSString stringWithFormat:kImageURL, hex];
 			NSURL *url = [NSURL URLWithString:urlString];
 			
+			// indicate to the user the image is loading
 			[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
 			image = [UIImage imageWithData:[NSData dataWithContentsOfURL:url]];
 			[[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
